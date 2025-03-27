@@ -1,0 +1,10 @@
+org/ulpgc/proyecto/servicios/IneTablaResponse.class
+org/ulpgc/proyecto/servicios/IneOperacionesResponse.class
+org/ulpgc/proyecto/servicios/IneDatabaseService.class
+org/ulpgc/proyecto/Main.class
+org/ulpgc/proyecto/servicios/BormeDataResponse.class
+org/ulpgc/proyecto/servicios/IneApiClient.class
+org/ulpgc/proyecto/servicios/BormeApiClient.class
+org/ulpgc/proyecto/servicios/IneDataResponse.class
+org/ulpgc/proyecto/servicios/IneApiClient$IneFunction.class
+org/ulpgc/proyecto/servicios/IneApiClient$IneLanguage.class
