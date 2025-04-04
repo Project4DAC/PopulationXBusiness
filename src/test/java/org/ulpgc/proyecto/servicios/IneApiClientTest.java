@@ -1,11 +1,8 @@
 package org.ulpgc.proyecto.servicios;
 
 import org.junit.jupiter.api.Test;
+import org.ulpgc.proyecto.servicios.inefeeder.IneApiClient;
 
-import java.io.IOException;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
 import java.util.HashMap;
 import java.util.Map;
 
