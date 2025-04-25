@@ -1,9 +1,10 @@
 package org.ulpgc.inefeeder.commands.update;
 
-import main.java.org.ulpgc.inefeeder.commands.query.FetchDataCommand;
-import main.java.org.ulpgc.inefeeder.servicios.Command;
-import main.java.org.ulpgc.inefeeder.servicios.Input;
-import main.java.org.ulpgc.inefeeder.servicios.Output;
+
+import org.ulpgc.inefeeder.commands.query.FetchDataCommand;
+import org.ulpgc.inefeeder.servicios.Command;
+import org.ulpgc.inefeeder.servicios.Input;
+import org.ulpgc.inefeeder.servicios.Output;
 
 import javax.sql.DataSource;
 import java.sql.Connection;

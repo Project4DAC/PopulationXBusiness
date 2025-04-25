@@ -1,9 +1,10 @@
-package main.java.org.ulpgc.inefeeder.commands.query;
+package org.ulpgc.inefeeder.commands.query;
 
-import main.java.org.ulpgc.inefeeder.servicios.Command;
-import main.java.org.ulpgc.inefeeder.servicios.Input;
-import main.java.org.ulpgc.inefeeder.servicios.Output;
-import main.java.org.ulpgc.inefeeder.servicios.general.helpers.SimpleOutput;
+
+import org.ulpgc.inefeeder.servicios.Command;
+import org.ulpgc.inefeeder.servicios.Input;
+import org.ulpgc.inefeeder.servicios.Output;
+import org.ulpgc.inefeeder.servicios.general.helpers.SimpleOutput;
 
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -18,14 +19,16 @@ public class FetchDataCommand implements Command {
     public FetchDataCommand(Input input, Output output) {
         this.input = input;
         this.output = output;
-        this.httpClient = HttpClient.newHttpClient();
-    }
+        this.httpClient = HttpClient.newBuilder()
+                .followRedirects(HttpClient.Redirect.ALWAYS)
+                .build();    }
 
     @Override
     public String execute() {
         try {
             Output urlOutput = new SimpleOutput();
             String url = new BuildUrlCommand(input, urlOutput).execute();
+            System.out.println("URL generada: " + url); // Agregar impresión
 
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(URI.create(url))

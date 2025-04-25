@@ -3,14 +3,14 @@ import io.javalin.http.Context;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 import org.ulpgc.inefeeder.commands.update.INEFetchAndSaveDataCommand;
-import org.ulpgc.inefeeder.servicios.general.helpers.INETableCommandFactory;
-import main.java.org.ulpgc.inefeeder.servicios.Input;
-import main.java.org.ulpgc.inefeeder.servicios.Output;
-import main.java.org.ulpgc.inefeeder.servicios.general.commands.RenderResultCommand;
-import main.java.org.ulpgc.inefeeder.servicios.general.helpers.SimpleInput;
-import main.java.org.ulpgc.inefeeder.servicios.general.helpers.SimpleOutput;
-import org.ulpgc.inefeeder.servicios.general.helpers.WebCommandFactory;
+import org.ulpgc.inefeeder.servicios.Input;
+import org.ulpgc.inefeeder.servicios.Output;
+import org.ulpgc.inefeeder.servicios.general.commands.RenderResultCommand;
+import org.ulpgc.inefeeder.servicios.general.helpers.*;
 
 import javax.sql.DataSource;
 import java.util.HashMap;
@@ -19,23 +19,27 @@ import java.util.Map;
 public class Main {
     private static DataSource ineDataSource;
 
-    public class DatabaseUtil {
+    public static class DatabaseUtil {
         public static HikariDataSource createDataSource(String dbPath, String poolName) {
             HikariConfig config = new HikariConfig();
             config.setJdbcUrl("jdbc:sqlite:" + dbPath);
             config.setDriverClassName("org.sqlite.JDBC");
-            config.setMaximumPoolSize(5);
-            config.setMinimumIdle(2);
-            config.setIdleTimeout(30000);
+            config.setMaximumPoolSize(1);
             config.setPoolName(poolName);
             return new HikariDataSource(config);
+
         }
     }
 
     public static void main(String[] args) {
         ineDataSource = DatabaseUtil.createDataSource("./INE.db", "INEPool");
-        INETableCommandFactory.createInitializeDatabaseCommand(ineDataSource).execute();
 
+        INETableCommandFactory.createInitializeDatabaseCommand(ineDataSource).execute();
+        ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
+        Runnable dailyTask = new DailyINEFetcher(ineDataSource);
+
+        long initialDelay = computeInitialDelay();
+        scheduler.scheduleAtFixedRate(dailyTask, initialDelay, 24 * 60, TimeUnit.MINUTES);
         Javalin app = Javalin.create().start(7001);
         app.get("/", ctx -> {
             Input input = new SimpleInput();
@@ -47,6 +51,10 @@ public class Main {
         app.post("/fetchINEData", Main::handleINE);
         app.get("/result/{function}", Main::renderResult);
         app.get("/result/{function}/{language}", Main::renderResultWithLanguage);
+        app.post("/runDailyFetcher", ctx -> {
+            new Thread(new DailyINEFetcher(ineDataSource)).start();
+            ctx.html("<html><body><h2>Consulta diaria del INE iniciada.</h2><a href='/'>Volver al inicio</a></body></html>");
+        });
     }
 
     private static void handleINE(Context ctx) {
@@ -114,5 +122,10 @@ public class Main {
         WebCommandFactory.createRenderResultCommand(input, output).execute();
 
         ctx.html(output.getValue("html"));
+    }
+    private static long computeInitialDelay() {
+        java.time.LocalDateTime now = java.time.LocalDateTime.now();
+        java.time.LocalDateTime nextRun = now.withHour(0).withMinute(0).withSecond(0).plusDays(1);
+        return java.time.Duration.between(now, nextRun).toMinutes();
     }
 }

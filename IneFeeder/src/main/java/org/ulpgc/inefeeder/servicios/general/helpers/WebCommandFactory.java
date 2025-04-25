@@ -1,10 +1,10 @@
 package org.ulpgc.inefeeder.servicios.general.helpers;
 
-import main.java.org.ulpgc.inefeeder.servicios.Command;
-import main.java.org.ulpgc.inefeeder.servicios.Input;
-import main.java.org.ulpgc.inefeeder.servicios.Output;
-import main.java.org.ulpgc.inefeeder.servicios.general.commands.RenderResultCommand;
+import org.ulpgc.inefeeder.servicios.Command;
+import org.ulpgc.inefeeder.servicios.Input;
+import org.ulpgc.inefeeder.servicios.Output;
 import org.ulpgc.inefeeder.servicios.general.commands.RenderHomeCommand;
+import org.ulpgc.inefeeder.servicios.general.commands.RenderResultCommand;
 
 public class WebCommandFactory {
     public static Command createRenderHomeCommand(Input input, Output output) {

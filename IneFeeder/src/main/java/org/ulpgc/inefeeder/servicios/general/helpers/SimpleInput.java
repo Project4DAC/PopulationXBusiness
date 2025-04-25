@@ -1,7 +1,8 @@
-package main.java.org.ulpgc.inefeeder.servicios.general.helpers;
+package org.ulpgc.inefeeder.servicios.general.helpers;
 
 
-import main.java.org.ulpgc.inefeeder.servicios.Input;
+
+import org.ulpgc.inefeeder.servicios.Input;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -1,4 +1,4 @@
-package main.java.org.ulpgc.inefeeder.servicios;
+package org.ulpgc.inefeeder.servicios;
 
 import java.util.Map;
 

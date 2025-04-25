@@ -1,8 +1,8 @@
 package org.ulpgc.inefeeder.servicios.general.commands;
 
-import main.java.org.ulpgc.inefeeder.servicios.Command;
-import main.java.org.ulpgc.inefeeder.servicios.Input;
-import main.java.org.ulpgc.inefeeder.servicios.Output;
+import org.ulpgc.inefeeder.servicios.Command;
+import org.ulpgc.inefeeder.servicios.Input;
+import org.ulpgc.inefeeder.servicios.Output;
 
 import static main.java.org.ulpgc.inefeeder.servicios.general.helpers.HtmlUtil.getHtmlFooter;
 import static main.java.org.ulpgc.inefeeder.servicios.general.helpers.HtmlUtil.getHtmlHeader;
@@ -45,27 +45,36 @@ public class RenderHomeCommand implements Command {
         StringBuilder html = new StringBuilder(getHtmlHeader());
         html.append("<h1>Consulta de datos del INE</h1>\n");
         html.append("<form id='ineForm' method='post' action='/fetchINEData'>\n");
-        html.append("<div><label for='function'>Función:</label>\n");
-        html.append("<select name='function' id='function' onchange='updateParamFields()'>\n");
 
+        // Language selector
+        html.append("<div style='margin-top:10px;'><label for='language'>Idioma:</label>\n");
+        html.append("<select id='language' name='language'>\n");
+        html.append("<option value='es' selected>Español</option>\n");
+        html.append("<option value='en'>Inglés</option>\n");
+        html.append("</select></div>\n");
+
+        // Function selector
+        html.append("<div style='margin-top:10px;'><label for='function'>Función:</label>\n");
+        html.append("<select name='function' id='function' onchange='updateParamFields()'>\n");
         for (FuncionesINE function : FuncionesINE.values()) {
             html.append("<option value='").append(function.name()).append("'>")
                     .append(function.name()).append("</option>\n");
         }
-
         html.append("</select></div>\n");
 
-        html.append("<div style='margin-top: 10px;'><label for='language'>Idioma:</label>\n");
-        html.append("<input type='text' id='language' name='language' value='es' placeholder='es, en, etc.'></div>\n");
+        // Additional params container
+        html.append("<div id='additionalParams' style='margin-top:15px;'></div>\n");
 
-        html.append("<div id='additionalParams' style='margin-top: 15px;'></div>\n");
-
-        html.append("<div style='margin-top: 15px;'><button type='submit'>Consultar datos</button></div>\n");
+        html.append("<div style='margin-top:15px;'><button type='submit'>Consultar datos</button></div>\n");
         html.append("</form>\n");
 
-        // Insertamos el JavaScript necesario para actualizar dinámicamente los campos
-        html.append(generateJavaScript());
+        // Daily fetch button
+        html.append("<form method='post' action='/runDailyFetcher' style='margin-top:30px;'>\n");
+        html.append("<button type='submit' style='background-color:#007bff; color:white; padding:10px 20px; border:none; border-radius:5px;'>Ejecutar Fetch Diario del INE</button>\n");
+        html.append("</form>\n");
 
+        // JavaScript for dynamic fields
+        html.append(generateJavaScript());
         html.append(getHtmlFooter());
 
         output.setValue("html", html.toString());
@@ -73,58 +82,35 @@ public class RenderHomeCommand implements Command {
     }
 
     private String generateJavaScript() {
-        StringBuilder script = new StringBuilder("<script>\n");
-        script.append("    function updateParamFields() {\n");
-        script.append("      const selectedFunction = document.getElementById('function').value;\n");
-        script.append("      const paramsDiv = document.getElementById('additionalParams');\n");
-        script.append("      paramsDiv.innerHTML = '';\n");
-
-        script.append("      const paramsByFunction = {\n");
-        script.append("        'DATOS_TABLA': ['idTabla'],\n");
-        script.append("        'DATOS_SERIE': ['idSerie'],\n");
-        script.append("        'DATOS_METADATAOPERACION': ['idOperacion'],\n");
-        script.append("        'OPERACION': ['idOperacion'],\n");
-        script.append("        'VARIABLES_OPERACION': ['idOperacion'],\n");
-        script.append("        'VALORES_VARIABLEOPERACION': ['idOperacion', 'idVariable'],\n");
-        script.append("        'TABLAS_OPERACION': ['idOperacion'],\n");
-        script.append("        'GRUPOS_TABLA': ['idTabla'],\n");
-        script.append("        'VALORES_GRUPOSTABLA': ['idTabla', 'idGrupo'],\n");
-        script.append("        'SERIE': ['idSerie'],\n");
-        script.append("        'SERIES_OPERACION': ['idOperacion'],\n");
-        script.append("        'VALORES_SERIE': ['idSerie'],\n");
-        script.append("        'SERIES_TABLA': ['idTabla'],\n");
-        script.append("        'SERIE_METADATAOPERACION': ['idSerie'],\n");
-        script.append("        'PUBLICACIONES_OPERACION': ['idOperacion'],\n");
-        script.append("        'PUBLICACIONFECHA_PUBLICACION': ['idPublicacion']\n");
-        script.append("      };\n");
-
-        script.append("      const params = paramsByFunction[selectedFunction] || [];\n");
-        script.append("      params.forEach(param => {\n");
-        script.append("        const paramDiv = document.createElement('div');\n");
-        script.append("        paramDiv.style.marginTop = '10px';\n");
-
-        script.append("        const label = document.createElement('label');\n");
-        script.append("        label.setAttribute('for', param);\n");
-        script.append("        label.textContent = param + ':';\n");
-
-        script.append("        const input = document.createElement('input');\n");
-        script.append("        input.setAttribute('type', 'text');\n");
-        script.append("        input.setAttribute('id', param);\n");
-        script.append("        input.setAttribute('name', param);\n");
-        script.append("        input.setAttribute('placeholder', 'Introduce el ' + param);\n");
-        script.append("        input.style.padding = '8px';\n");
-        script.append("        input.style.width = '300px';\n");
-        script.append("        input.style.marginTop = '5px';\n");
-
-        script.append("        paramDiv.appendChild(label);\n");
-        script.append("        paramDiv.appendChild(input);\n");
-        script.append("        paramsDiv.appendChild(paramDiv);\n");
-        script.append("      });\n");
-        script.append("    }\n");
-
-        script.append("    document.addEventListener('DOMContentLoaded', function () { updateParamFields(); });\n");
-        script.append("</script>\n");
-
-        return script.toString();
+        return "<script>\n" +
+                "const paramsByFunction = {\n" +
+                "  'DATOS_TABLA': [{name: 'idTabla', alias: 'id', repeatable: false}, {name: 'núlt', alias: 'nult', repeatable: false}, {name: 'tv', alias: 'tv', repeatable: true}],\n" +
+                "  'DATOS_SERIE': [{name: 'idSerie', alias: 'id', repeatable: false}],\n" +
+                "  'TABLAS_OPERACION': [{name: 'idOperacion', alias: 'id', repeatable: false}],\n" +
+                "  // ... agrega más funciones según necesites\n" +
+                "};\n" +
+                "function updateParamFields() {\n" +
+                "  const selected = document.getElementById('function').value;\n" +
+                "  const container = document.getElementById('additionalParams');\n" +
+                "  container.innerHTML = '';\n" +
+                "  const params = paramsByFunction[selected] || [];\n" +
+                "  params.forEach(p => addParamField(container, p));\n" +
+                "}\n" +
+                "function addParamField(container, param) {\n" +
+                "  const wrapper = document.createElement('div'); wrapper.style.marginTop = '10px';\n" +
+                "  const label = document.createElement('label'); label.textContent = param.name + ':'; label.style.marginRight = '5px';\n" +
+                "  wrapper.appendChild(label);\n" +
+                "  const input = document.createElement('input');\n" +
+                "  input.type = 'text'; input.name = param.alias; input.placeholder = 'Introduce ' + param.name; input.style.padding = '8px'; input.style.width = '200px';\n" +
+                "  wrapper.appendChild(input);\n" +
+                "  if (param.repeatable) {\n" +
+                "    const btn = document.createElement('button'); btn.type = 'button'; btn.textContent = '+'; btn.style.marginLeft = '5px';\n" +
+                "    btn.onclick = () => { addParamField(container, param); };\n" +
+                "    wrapper.appendChild(btn);\n" +
+                "  }\n" +
+                "  container.appendChild(wrapper);\n" +
+                "}\n" +
+                "document.addEventListener('DOMContentLoaded', updateParamFields);\n" +
+                "</script>";
     }
 }

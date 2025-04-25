@@ -13,8 +13,12 @@ import org.ulpgc.BormeFeeder.services.general.helpers.SimpleInput;
 import org.ulpgc.BormeFeeder.services.general.helpers.SimpleOutput;
 
 import javax.sql.DataSource;
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import static org.ulpgc.BormeFeeder.services.general.helpers.WebCommandFactory.createRenderHomeCommand;
 
@@ -57,8 +61,9 @@ public class Main {
             new RenderResultCommand(input, output).execute();
             ctx.html(output.getValue("html"));
         });
+        scheduleDailyBormeFetch();
     }
-
+    //TODO Localizar el español y cambiarlo a ingles.
     private static void handleBorme(Context ctx) {
         try {
             Input input = createBormeInput(ctx);
@@ -94,5 +99,28 @@ public class Main {
 
         input.setValue("params", params);
         return input;
+    }
+    private static void scheduleDailyBormeFetch() {
+        ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+
+        Runnable task = () -> {
+            System.out.println("Ejecutando fetch diario de BORME...");
+
+            SimpleInput input = new SimpleInput();
+            SimpleOutput output = new SimpleOutput();
+
+            String today = LocalDate.now().toString(); // Formato: yyyy-MM-dd
+            input.setValue("date", today);
+
+            try {
+                new BormeFetchAndSaveDataCommand(input, output, bormeDataSource).execute();
+                System.out.println("Datos BORME guardados para " + today);
+            } catch (Exception e) {
+                System.err.println("Error en fetch diario: " + e.getMessage());
+                e.printStackTrace();
+            }
+        };
+
+        scheduler.scheduleAtFixedRate(task, 0, 24, TimeUnit.HOURS);
     }
 }
