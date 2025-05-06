@@ -24,9 +24,7 @@ public class FetchDataCommand implements Command {
     @Override
     public String execute() {
         try {
-            Output urlOutput = new SimpleOutput();
-            String url = new BuildURLCommand(input, urlOutput).execute();
-
+            String url = input.getValue("url");
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(URI.create(url))
                     .header("Accept", "application/json")
@@ -43,6 +41,7 @@ public class FetchDataCommand implements Command {
             output.setValue("url", url);
             output.setValue("jsonResponse", jsonResponse);
             output.setValue("date", input.getValue("date"));
+            System.out.println((String) output.getValue("jsonResponse"));
             return jsonResponse;
         } catch (Exception e) {
             throw new RuntimeException("Error al ejecutar la consulta: " + e.getMessage(), e);

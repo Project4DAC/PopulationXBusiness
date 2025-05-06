@@ -1,14 +1,16 @@
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
+
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import io.javalin.Javalin;
 import io.javalin.http.Context;
+import jakarta.jms.Connection;
+import jakarta.jms.ConnectionFactory;
 import org.ulpgc.BormeFeeder.commands.update.BormeFetchAndSaveDataCommand;
 import org.ulpgc.BormeFeeder.services.Input;
 import org.ulpgc.BormeFeeder.services.Output;
 import org.ulpgc.BormeFeeder.services.general.commands.RenderResultCommand;
 import org.ulpgc.BormeFeeder.services.general.helpers.BormeTableCommandFactory;
+import org.ulpgc.BormeFeeder.services.general.helpers.DailyBormeFetcher;
 import org.ulpgc.BormeFeeder.services.general.helpers.SimpleInput;
 import org.ulpgc.BormeFeeder.services.general.helpers.SimpleOutput;
 
@@ -40,6 +42,12 @@ public class Main {
         bormeDataSource = DatabaseUtil.createDataSource("BORME.db", "BORMEPool");
         BormeTableCommandFactory.createInitializeDatabaseCommand(bormeDataSource).execute();
 
+        ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
+        Runnable dailyTask = new DailyBormeFetcher(bormeDataSource);
+
+        long initialDelay = computeInitialDelay();
+        scheduler.scheduleAtFixedRate(dailyTask, initialDelay, 24 * 60, TimeUnit.MINUTES);
+
         Javalin app = Javalin.create().start(7002);
         app.get("/", ctx -> {
                Input input = new SimpleInput();
@@ -47,21 +55,22 @@ public class Main {
         createRenderHomeCommand(input, output).execute();
         ctx.html(output.getValue("html"));}
         );
+        app.post("/runDailyFetcher", ctx -> {
+            new Thread(new DailyBormeFetcher(bormeDataSource)).start();
+            ctx.html("<html><body><h2>Consulta diaria del Borme iniciada.</h2><a href='/'>Volver al inicio</a></body></html>");
+        });
 
         app.post("/fetchBormeData",Main::handleBorme);
 
         app.get("/borme/{date}", ctx -> {
             Input input = new SimpleInput();
-            input.setValue("date", ctx.pathParam("date"));
+            Output output = new SimpleOutput();
             input.setValue("date", ctx.pathParam("date"));
             input.setValue("url", ctx.sessionAttribute("url"));
             input.setValue("jsonResponse", ctx.sessionAttribute("jsonResponse"));
-
-            Output output = new SimpleOutput();
             new RenderResultCommand(input, output).execute();
             ctx.html(output.getValue("html"));
         });
-        scheduleDailyBormeFetch();
     }
     //TODO Localizar el español y cambiarlo a ingles.
     private static void handleBorme(Context ctx) {
@@ -100,27 +109,9 @@ public class Main {
         input.setValue("params", params);
         return input;
     }
-    private static void scheduleDailyBormeFetch() {
-        ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
-
-        Runnable task = () -> {
-            System.out.println("Ejecutando fetch diario de BORME...");
-
-            SimpleInput input = new SimpleInput();
-            SimpleOutput output = new SimpleOutput();
-
-            String today = LocalDate.now().toString(); // Formato: yyyy-MM-dd
-            input.setValue("date", today);
-
-            try {
-                new BormeFetchAndSaveDataCommand(input, output, bormeDataSource).execute();
-                System.out.println("Datos BORME guardados para " + today);
-            } catch (Exception e) {
-                System.err.println("Error en fetch diario: " + e.getMessage());
-                e.printStackTrace();
-            }
-        };
-
-        scheduler.scheduleAtFixedRate(task, 0, 24, TimeUnit.HOURS);
+    private static long computeInitialDelay() {
+        java.time.LocalDateTime now = java.time.LocalDateTime.now();
+        java.time.LocalDateTime nextRun = now.withHour(0).withMinute(0).withSecond(0).plusDays(1);
+        return java.time.Duration.between(now, nextRun).toMinutes();
     }
 }
