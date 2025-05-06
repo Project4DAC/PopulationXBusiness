@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/BormeFeeder/BormeFeeder.iml" filepath="$PROJECT_DIR$/BormeFeeder/BormeFeeder.iml" />
+      <module fileurl="file://$PROJECT_DIR$/IneFeeder/IneFeeder.iml" filepath="$PROJECT_DIR$/IneFeeder/IneFeeder.iml" />
+    </modules>
+  </component>
+</project>
