@@ -63,4 +63,3 @@ public class DailyBormeFetcher implements Runnable {
         System.err.println("Failed to fetch BORME data for any recent dates");
     }
 }
-//TODO Aplicar Gitflow
