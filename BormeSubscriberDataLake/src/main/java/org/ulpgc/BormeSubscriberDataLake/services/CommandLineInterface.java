@@ -2,16 +2,19 @@ package org.ulpgc.BormeSubscriberDataLake.services;
 
 import org.ulpgc.BormeSubscriberDataLake.Commands.*;
 import org.ulpgc.BormeSubscriberDataLake.Interfaces.Command;
+import org.ulpgc.BormeSubscriberDataLake.Interfaces.DataProcessor;
 
 import java.util.Scanner;
 
 public class CommandLineInterface {
     private final MessageProcessor processor;
+    private final DataProcessor dataProcessor;
     private final Scanner scanner;
     private boolean running = true;
 
-    public CommandLineInterface(MessageProcessor processor) {
+    public CommandLineInterface(MessageProcessor processor, DataProcessor dataProcessor) {
         this.processor = processor;
+        this.dataProcessor = dataProcessor;
         this.scanner = new Scanner(System.in);
     }
 
@@ -45,6 +48,8 @@ public class CommandLineInterface {
             return new ExitCommand(processor, this);
         } else if (input.equalsIgnoreCase("files")) {
             return new ListFilesCommand();
+        } else if (input.equalsIgnoreCase("process")) {
+            return new ProcessCommand(dataProcessor);
         }
         return null;
     }
