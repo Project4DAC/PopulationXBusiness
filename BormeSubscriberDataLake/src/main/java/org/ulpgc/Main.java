@@ -8,6 +8,8 @@ import java.nio.file.Paths;
 
 import org.ulpgc.BormeSubscriberDataLake.Interfaces.MessageBrokerConnector;
 import org.ulpgc.BormeSubscriberDataLake.Interfaces.MessageSaver;
+import org.ulpgc.BormeSubscriberDataLake.processors.BormeDataProcessor;
+import org.ulpgc.BormeSubscriberDataLake.Interfaces.DataProcessor;
 import org.ulpgc.BormeSubscriberDataLake.services.*;
 
 public class Main {
@@ -29,7 +31,10 @@ public class Main {
         MessageProcessor processor = new MessageProcessor(connector, messageSaver);
         processor.startProcessing();
 
-        CommandLineInterface cli = new CommandLineInterface(processor);
+        // Initialize the DataProcessor for handling zones
+        DataProcessor dataProcessor = new BormeDataProcessor(DATALAKE_ROOT);
+
+        CommandLineInterface cli = new CommandLineInterface(processor, dataProcessor);
         cli.start();
     }
 
@@ -75,4 +80,3 @@ public class Main {
         }
     }
 }
-
