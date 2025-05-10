@@ -6,6 +6,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.ulpgc.BormeSubscriberDataLake.Interfaces.MessageBrokerConnector;
 import org.ulpgc.BormeSubscriberDataLake.Interfaces.MessageSaver;
 import org.ulpgc.BormeSubscriberDataLake.processors.BormeDataProcessor;
@@ -13,6 +15,8 @@ import org.ulpgc.BormeSubscriberDataLake.Interfaces.DataProcessor;
 import org.ulpgc.BormeSubscriberDataLake.services.*;
 
 public class Main {
+    private static final Logger logger = LoggerFactory.getLogger(Main.class);
+
     private static final String DATALAKE_ROOT = System.getenv("DATALAKE_PATH") != null ?
             System.getenv("DATALAKE_PATH") :
             System.getProperty("user.home") + File.separator + "activemq-datalake";
@@ -21,21 +25,52 @@ public class Main {
     private static final String CONSUMPTION_ZONE = "consumption";
 
     public static void main(String[] args) {
-        Config config = readConfig();
-        setupDataLake();
+        try {
+            logger.info("Starting BormeSubscriberDataLake application");
 
-        String rawPath = DATALAKE_ROOT + File.separator + RAW_ZONE;
-        MessageBrokerConnector connector = new ActiveMQConnector(config);
-        MessageSaver messageSaver = new FileMessageSaver(rawPath);
+            // Read configuration
+            Config config = readConfig();
+            logger.info("Configuration loaded successfully");
 
-        MessageProcessor processor = new MessageProcessor(connector, messageSaver);
-        processor.startProcessing();
+            // Setup DataLake directory structure
+            setupDataLake();
 
-        // Initialize the DataProcessor for handling zones
-        DataProcessor dataProcessor = new BormeDataProcessor(DATALAKE_ROOT);
+            // Initialize components
+            String rawPath = DATALAKE_ROOT + File.separator + RAW_ZONE;
+            MessageBrokerConnector connector = new ActiveMQConnector(config);
+            MessageSaver messageSaver = new FileMessageSaver(rawPath);
 
-        CommandLineInterface cli = new CommandLineInterface(processor, dataProcessor);
-        cli.start();
+            // Initialize the processor
+            MessageProcessor processor = new MessageProcessor(connector, messageSaver);
+
+            // Start message processing
+            try {
+                processor.startProcessing();
+                logger.info("Message processor started successfully");
+            } catch (Exception e) {
+                logger.error("Failed to start message processor", e);
+                System.err.println("Failed to connect to message broker. Check your connection settings and credentials.");
+                System.err.println("Error: " + e.getMessage());
+
+                // Continue with CLI even if broker connection fails
+                System.out.println("Continuing with command-line interface...");
+            }
+
+            // Initialize the DataProcessor for handling zones
+            DataProcessor dataProcessor = new BormeDataProcessor(DATALAKE_ROOT);
+            logger.info("Data processor initialized");
+
+            // Start the command-line interface
+            CommandLineInterface cli = new CommandLineInterface(processor, dataProcessor);
+            logger.info("Starting command-line interface");
+            cli.start();
+
+        } catch (Exception e) {
+            logger.error("Application startup failed", e);
+            System.err.println("Fatal error during application startup: " + e.getMessage());
+            e.printStackTrace();
+            System.exit(1);
+        }
     }
 
     private static Config readConfig() {
@@ -44,10 +79,18 @@ public class Main {
         String brokerUrl = System.getenv("ACTIVEMQ_BROKER_URL");
         String topicName = System.getenv("ACTIVEMQ_TOPIC");
 
-        if (brokerUrl == null) brokerUrl = "tcp://localhost:61616";
-        if (topicName == null) topicName = "BORME.Publicaciones.Nuevas";
+        if (brokerUrl == null) {
+            brokerUrl = "tcp://localhost:61616";
+            logger.info("Using default broker URL: {}", brokerUrl);
+        }
+
+        if (topicName == null) {
+            topicName = "BORME.Publicaciones.Nuevas";
+            logger.info("Using default topic name: {}", topicName);
+        }
 
         if (user == null || password == null) {
+            logger.error("Missing ActiveMQ credentials");
             throw new RuntimeException("Environment variables ACTIVEMQ_USER and ACTIVEMQ_PASSWORD must be set");
         }
 
@@ -59,24 +102,24 @@ public class Main {
             Path datalakePath = Paths.get(DATALAKE_ROOT);
             if (!Files.exists(datalakePath)) {
                 Files.createDirectory(datalakePath);
-                System.out.println("Created DataLake root directory: " + datalakePath);
+                logger.info("Created DataLake root directory: {}", datalakePath);
             }
 
             createDirectoryIfNotExists(Paths.get(DATALAKE_ROOT, RAW_ZONE));
             createDirectoryIfNotExists(Paths.get(DATALAKE_ROOT, PROCESSED_ZONE));
             createDirectoryIfNotExists(Paths.get(DATALAKE_ROOT, CONSUMPTION_ZONE));
 
-            System.out.println("DataLake structure initialized successfully");
+            logger.info("DataLake structure initialized successfully");
         } catch (IOException e) {
-            System.err.println("Error creating DataLake structure: " + e.getMessage());
-            e.printStackTrace();
+            logger.error("Error creating DataLake structure", e);
+            throw new RuntimeException("Failed to create DataLake directory structure: " + e.getMessage(), e);
         }
     }
 
     private static void createDirectoryIfNotExists(Path path) throws IOException {
         if (!Files.exists(path)) {
             Files.createDirectory(path);
-            System.out.println("Created directory: " + path);
+            logger.info("Created directory: {}", path);
         }
     }
 }

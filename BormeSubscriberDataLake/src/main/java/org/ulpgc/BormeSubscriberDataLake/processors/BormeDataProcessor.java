@@ -11,6 +11,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Stream;
 
 public class BormeDataProcessor implements DataProcessor {
@@ -23,88 +24,87 @@ public class BormeDataProcessor implements DataProcessor {
         this.rawPath = datalakeRoot + File.separator + "raw";
         this.processedPath = datalakeRoot + File.separator + "processed";
         this.consumptionPath = datalakeRoot + File.separator + "consumption";
-        
+
         // Register transformers
         this.transformers = new HashMap<>();
         this.transformers.put("notification", new NotificationTransformer());
         this.transformers.put("content", new ContentTransformer());
+        this.transformers.put("consumption", new ConsumptionTransformer());
     }
 
     @Override
     public void process() {
+        AtomicInteger processedCount = new AtomicInteger(0);
+
         try (Stream<Path> paths = Files.list(Paths.get(rawPath))) {
             paths.filter(Files::isRegularFile)
-                 .forEach(this::processFile);
+                    .forEach(path -> {
+                        if (processFile(path)) {
+                            processedCount.incrementAndGet();
+                        }
+                    });
+
+            System.out.println("Processing complete! Processed " + processedCount.get() + " files.");
         } catch (IOException e) {
             System.err.println("Error processing raw files: " + e.getMessage());
             e.printStackTrace();
         }
     }
 
-    private void processFile(Path filePath) {
+    private boolean processFile(Path filePath) {
         try {
             String filename = filePath.getFileName().toString();
-            
+
             // Skip already processed files
             Path processedFile = Paths.get(processedPath, filename);
             if (Files.exists(processedFile)) {
-                return;
+                System.out.println("Skipping already processed file: " + filename);
+                return false;
             }
-            
+
             // Read the raw file
             String content = new String(Files.readAllBytes(filePath));
-            
+
             // Select appropriate transformer and transform content
             String processedContent;
             String consumptionContent;
-            
+
             if (filename.startsWith("notification_")) {
                 DataTransformer transformer = transformers.get("notification");
                 processedContent = transformer.transform(content);
-                consumptionContent = createConsumptionVersion("notification", content, processedContent);
+                consumptionContent = transformers.get("consumption").transform(processedContent);
             } else if (filename.startsWith("borme_content_")) {
                 DataTransformer transformer = transformers.get("content");
                 processedContent = transformer.transform(content);
-                consumptionContent = createConsumptionVersion("content", content, processedContent);
+                consumptionContent = transformers.get("consumption").transform(processedContent);
             } else {
                 // Unknown file type, just copy
                 processedContent = content;
                 consumptionContent = content;
             }
-            
+
             // Save to processed zone
             saveToFile(processedContent, processedPath + File.separator + filename);
             System.out.println("Processed file: " + filename);
-            
-            // Save to consumption zone
+
+            // Save to consumption zone with prefix
             saveToFile(consumptionContent, consumptionPath + File.separator + "consumption_" + filename);
             System.out.println("Created consumption version: consumption_" + filename);
-            
+
+            return true;
         } catch (IOException e) {
             System.err.println("Error processing file " + filePath + ": " + e.getMessage());
             e.printStackTrace();
-        }
-    }
-
-    private String createConsumptionVersion(String type, String rawContent, String processedContent) {
-        // Create consumption-optimized version based on file type
-        // This could be further refactored into separate transformer classes
-        switch (type) {
-            case "notification":
-                return transformers.get("notification").transform(processedContent);
-            case "content":
-                return transformers.get("content").transform(processedContent);
-            default:
-                return processedContent;
+            return false;
         }
     }
 
     private void saveToFile(String content, String filepath) throws IOException {
         File file = new File(filepath);
-        
+
         // Ensure directory exists
         file.getParentFile().mkdirs();
-        
+
         try (FileWriter writer = new FileWriter(file)) {
             writer.write(content);
         }
