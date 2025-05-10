@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <bytecodeTargetLevel>
+      <module name="BormeFeeder" target="21" />
+      <module name="BormeReceiver" target="21" />
+      <module name="BusXpop" target="1.5" />
+      <module name="IneFeeder" target="21" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
