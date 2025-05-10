@@ -1,6 +1,5 @@
 package org.ulpgc.inefeeder.servicios.general.helpers;
 
-import org.ulpgc.inefeeder.commands.query.BuildUrlCommand;
 import org.ulpgc.inefeeder.commands.update.INEFetchAndSaveDataCommand;
 import org.ulpgc.inefeeder.servicios.Input;
 import org.ulpgc.inefeeder.servicios.Output;

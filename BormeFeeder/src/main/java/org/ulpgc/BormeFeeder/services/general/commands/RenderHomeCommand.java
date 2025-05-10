@@ -27,6 +27,9 @@ public class RenderHomeCommand implements Command {
         html.append("<input type='date' id='date' name='date'></div>\n");
         html.append("<div style='margin-top: 15px;'><button type='submit'>Consultar datos</button></div>\n");
         html.append("</form>\n");
+        html.append("<form method='post' action='/runDailyFetcher' style='margin-top:30px;'>\n");
+        html.append("<button type='submit' style='background-color:#007bff; color:white; padding:10px 20px; border:none; border-radius:5px;'>Ejecutar Fetch Diario del Borme</button>\n");
+        html.append("</form>\n");
         html.append(getHtmlFooter());
 
         output.setValue("html", html.toString());
