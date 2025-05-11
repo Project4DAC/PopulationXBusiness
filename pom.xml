@@ -13,5 +13,6 @@
         <module>BormeFeeder</module>
         <module>IneFeeder</module>
         <module>BormeSubscriberDataLake</module>
+        <module>INESubscriberDataLake</module>
     </modules>
 </project>

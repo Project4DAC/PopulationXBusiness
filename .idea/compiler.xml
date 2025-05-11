@@ -8,8 +8,10 @@
         <outputRelativeToContentRoot value="true" />
         <module name="BormeFeeder" />
         <module name="IneFeeder" />
-        <module name="BormeSubscriberDataLake" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="IneSubscriberDataLake" target="23" />
+    </bytecodeTargetLevel>
   </component>
 </project>
