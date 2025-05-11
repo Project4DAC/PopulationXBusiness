@@ -52,59 +52,57 @@ public class BormeDataProcessor implements DataProcessor {
     }
 
     private boolean processFile(Path filePath) {
+        String filename = filePath.getFileName().toString();
+        Path processedFile = Paths.get(processedPath, filename);
+
+        // SKIP logic: omit if already processed
+        if (Files.exists(processedFile)) {
+            System.out.println("Skipping already processed file: " + filename);
+            return false;
+        }
+
         try {
-            String filename = filePath.getFileName().toString();
-
-            // Skip already processed files
-            Path processedFile = Paths.get(processedPath, filename);
-            if (Files.exists(processedFile)) {
-                System.out.println("Skipping already processed file: " + filename);
-                return false;
-            }
-
             // Read the raw file
             String content = new String(Files.readAllBytes(filePath));
 
-            // Select appropriate transformer and transform content
+            // Select appropriate transformer
+            DataTransformer transformer;
             String processedContent;
             String consumptionContent;
 
             if (filename.startsWith("notification_")) {
-                DataTransformer transformer = transformers.get("notification");
+                transformer = transformers.get("notification");
                 processedContent = transformer.transform(content);
-                consumptionContent = transformers.get("consumption").transform(processedContent);
             } else if (filename.startsWith("borme_content_")) {
-                DataTransformer transformer = transformers.get("content");
+                transformer = transformers.get("content");
                 processedContent = transformer.transform(content);
-                consumptionContent = transformers.get("consumption").transform(processedContent);
             } else {
-                // Unknown file type, just copy
+                // Unknown file type: passthrough
                 processedContent = content;
-                consumptionContent = content;
             }
 
-            // Save to processed zone
-            saveToFile(processedContent, processedPath + File.separator + filename);
+            // Save processed output
+            saveToFile(processedContent, Paths.get(processedPath, filename));
             System.out.println("Processed file: " + filename);
 
-            // Save to consumption zone with prefix
-            saveToFile(consumptionContent, consumptionPath + File.separator + "consumption_" + filename);
-            System.out.println("Created consumption version: consumption_" + filename);
+            // Transform for consumption
+            consumptionContent = transformers.get("consumption").transform(processedContent);
+            String consumptionFilename = "consumption_" + filename;
+            saveToFile(consumptionContent, Paths.get(consumptionPath, consumptionFilename));
+            System.out.println("Created consumption version: " + consumptionFilename);
 
             return true;
         } catch (IOException e) {
-            System.err.println("Error processing file " + filePath + ": " + e.getMessage());
+            System.err.println("Error processing file " + filename + ": " + e.getMessage());
             e.printStackTrace();
             return false;
         }
     }
 
-    private void saveToFile(String content, String filepath) throws IOException {
-        File file = new File(filepath);
-
-        // Ensure directory exists
+    private void saveToFile(String content, Path target) throws IOException {
+        File file = target.toFile();
+        // Ensure parent directory exists
         file.getParentFile().mkdirs();
-
         try (FileWriter writer = new FileWriter(file)) {
             writer.write(content);
         }
