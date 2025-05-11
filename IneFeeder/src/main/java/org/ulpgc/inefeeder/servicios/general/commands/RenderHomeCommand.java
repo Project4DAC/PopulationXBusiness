@@ -65,15 +65,40 @@ public class RenderHomeCommand implements Command {
         // Additional params container
         html.append("<div id='additionalParams' style='margin-top:15px;'></div>\n");
 
+        // Option to publish to ActiveMQ
+        html.append("<div style='margin-top:10px;'>\n");
+        html.append("<input type='checkbox' id='publishToActiveMQ' name='publishToActiveMQ' value='true'>\n");
+        html.append("<label for='publishToActiveMQ'>Publicar resultado a ActiveMQ</label>\n");
+        html.append("</div>\n");
+
         html.append("<div style='margin-top:15px;'><button type='submit'>Consultar datos</button></div>\n");
         html.append("</form>\n");
 
-        // Daily fetch button
-        html.append("<form method='post' action='/runDailyFetcher' style='margin-top:30px;'>\n");
+        // Daily fetch options
+        html.append("<h2 style='margin-top:30px;'>Fetch Diario</h2>\n");
+
+        // Regular fetch button
+        html.append("<form method='post' action='/runDailyFetcher' style='margin-top:10px;'>\n");
         html.append("<button type='submit' style='background-color:#007bff; color:white; padding:10px 20px; border:none; border-radius:5px;'>Ejecutar Fetch Diario del INE</button>\n");
         html.append("</form>\n");
 
-        // JavaScript for dynamic fields
+        // Fetch with ActiveMQ publishing button
+        html.append("<form method='post' action='/runDailyFetcherWithPublish' style='margin-top:10px;'>\n");
+        html.append("<button type='submit' style='background-color:#28a745; color:white; padding:10px 20px; border:none; border-radius:5px;'>Ejecutar Fetch Diario con Publicación a ActiveMQ</button>\n");
+        html.append("</form>\n");
+
+        // ActiveMQ settings button
+        html.append("<div style='margin-top:15px;'>\n");
+        html.append("<button type='button' id='showSettingsBtn' onclick='toggleSettings()' style='background-color:#6c757d; color:white; padding:5px 10px; border:none; border-radius:5px;'>Configuración ActiveMQ</button>\n");
+        html.append("<div id='mqSettings' style='display:none; margin-top:10px; padding:15px; border:1px solid #ccc; border-radius:5px;'>\n");
+        html.append("<form method='post' action='/updateMQSettings'>\n");
+        html.append("<div><label for='brokerUrl'>URL del Broker:</label>\n");
+        html.append("<input type='text' id='brokerUrl' name='brokerUrl' value='tcp://localhost:61616' style='width:250px; margin-left:5px;'></div>\n");
+        html.append("<div style='margin-top:10px;'><button type='submit' style='background-color:#6c757d; color:white; padding:5px 10px; border:none; border-radius:5px;'>Guardar Configuración</button></div>\n");
+        html.append("</form>\n");
+        html.append("</div></div>\n");
+
+        // JavaScript for dynamic fields and settings toggle
         html.append(generateJavaScript());
         html.append(getHtmlFooter());
 
@@ -109,6 +134,17 @@ public class RenderHomeCommand implements Command {
                 "    wrapper.appendChild(btn);\n" +
                 "  }\n" +
                 "  container.appendChild(wrapper);\n" +
+                "}\n" +
+                "function toggleSettings() {\n" +
+                "  const settings = document.getElementById('mqSettings');\n" +
+                "  const btn = document.getElementById('showSettingsBtn');\n" +
+                "  if (settings.style.display === 'none') {\n" +
+                "    settings.style.display = 'block';\n" +
+                "    btn.textContent = 'Ocultar Configuración';\n" +
+                "  } else {\n" +
+                "    settings.style.display = 'none';\n" +
+                "    btn.textContent = 'Configuración ActiveMQ';\n" +
+                "  }\n" +
                 "}\n" +
                 "document.addEventListener('DOMContentLoaded', updateParamFields);\n" +
                 "</script>";

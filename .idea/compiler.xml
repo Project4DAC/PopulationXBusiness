@@ -7,6 +7,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="BormeFeeder" />
+        <module name="INESubscriberDataLake" />
         <module name="IneFeeder" />
       </profile>
     </annotationProcessing>
