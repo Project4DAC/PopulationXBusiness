@@ -13,7 +13,9 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class FilesCommand implements Command {
-    private final String datalakeRoot = System.getProperty("user.dir") + File.separator + "datalake";
+    private final String datalakeRoot  = System.getenv("DATALAKE_PATH") != null ?
+            System.getenv("DATALAKE_PATH") :
+            System.getProperty("user.home") + File.separator + "activemq-datalake";
     private final List<String> zones = Arrays.asList("raw", "processed", "consumption");
     
     @Override

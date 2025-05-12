@@ -1,9 +1,9 @@
 package org.ulpgc.inefeeder.commands.update;
 
 import com.google.gson.*;
-import org.ulpgc.inefeeder.servicios.Command;
-import org.ulpgc.inefeeder.servicios.Input;
-import org.ulpgc.inefeeder.servicios.Output;
+import org.ulpgc.inefeeder.servicios.general.Interfaces.Command;
+import org.ulpgc.inefeeder.servicios.general.Interfaces.Input;
+import org.ulpgc.inefeeder.servicios.general.Interfaces.Output;
 
 import java.lang.reflect.Type;
 

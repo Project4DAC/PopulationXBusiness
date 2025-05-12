@@ -7,8 +7,9 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import org.ulpgc.inefeeder.commands.update.INEFetchAndSaveDataCommand;
-import org.ulpgc.inefeeder.servicios.Input;
-import org.ulpgc.inefeeder.servicios.Output;
+import org.ulpgc.inefeeder.servicios.general.Interfaces.Input;
+import org.ulpgc.inefeeder.servicios.general.Interfaces.Output;
+import org.ulpgc.inefeeder.servicios.general.Interfaces.Publisher;
 import org.ulpgc.inefeeder.servicios.general.commands.RenderResultCommand;
 import org.ulpgc.inefeeder.servicios.general.helpers.*;
 
@@ -36,7 +37,7 @@ public class Main {
 
         INETableCommandFactory.createInitializeDatabaseCommand(ineDataSource).execute();
         ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
-        Runnable dailyTask = new DailyINEFetcher(ineDataSource);
+        Runnable dailyTask = new RunDailyINEFetcherCommand(ineDataSource);
 
         long initialDelay = computeInitialDelay();
         scheduler.scheduleAtFixedRate(dailyTask, initialDelay, 24 * 60, TimeUnit.MINUTES);
@@ -53,6 +54,11 @@ public class Main {
         app.get("/result/{function}/{language}", Main::renderResultWithLanguage);
         app.post("/runDailyFetcher", ctx -> {
             new Thread(new DailyINEFetcher(ineDataSource)).start();
+            ctx.html("<html><body><h2>Consulta diaria del INE iniciada.</h2><a href='/'>Volver al inicio</a></body></html>");
+        });
+        app.post("/runDailyFetcherWithPublish", ctx -> {
+            Publisher publisher = new ActiveMQPublisher("tcp://localhost:61616");
+            new Thread(new DailyINEFetcherWithPublisher(ineDataSource, publisher)).start();
             ctx.html("<html><body><h2>Consulta diaria del INE iniciada.</h2><a href='/'>Volver al inicio</a></body></html>");
         });
     }

@@ -1,4 +1,4 @@
-package org.ulpgc.inefeeder.servicios;
+package org.ulpgc.inefeeder.servicios.general.Interfaces;
 
 // Interface Input
 public interface Input {

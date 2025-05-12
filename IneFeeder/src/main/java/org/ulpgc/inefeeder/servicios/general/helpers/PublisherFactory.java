@@ -1,5 +1,7 @@
-package org.ulpgc.inefeeder.servicios;
+package org.ulpgc.inefeeder.servicios.general.helpers;
 
+
+import org.ulpgc.inefeeder.servicios.general.Interfaces.Publisher;
 
 public class PublisherFactory {
     /**

@@ -1,9 +1,10 @@
-package org.ulpgc.inefeeder.servicios;
+package org.ulpgc.inefeeder.servicios.general.helpers;
 
 import org.ulpgc.inefeeder.commands.update.INEFetchAndSaveDataCommand;
 import org.ulpgc.inefeeder.commands.publisher.PublishINEDataCommand;
-import org.ulpgc.inefeeder.servicios.general.helpers.SimpleInput;
-import org.ulpgc.inefeeder.servicios.general.helpers.SimpleOutput;
+import org.ulpgc.inefeeder.servicios.general.Interfaces.Input;
+import org.ulpgc.inefeeder.servicios.general.Interfaces.Output;
+import org.ulpgc.inefeeder.servicios.general.Interfaces.Publisher;
 
 import javax.sql.DataSource;
 import java.sql.Connection;

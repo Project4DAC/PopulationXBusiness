@@ -1,7 +1,11 @@
 package org.ulpgc.inefeeder.commands.publisher;
 
-import org.ulpgc.inefeeder.servicios.*;
-import org.ulpgc.inefeeder.servicios.PublisherFactory;
+import org.ulpgc.inefeeder.servicios.general.helpers.DailyINEFetcherWithPublisher;
+import org.ulpgc.inefeeder.servicios.general.helpers.PublisherFactory;
+import org.ulpgc.inefeeder.servicios.general.Interfaces.Command;
+import org.ulpgc.inefeeder.servicios.general.Interfaces.Input;
+import org.ulpgc.inefeeder.servicios.general.Interfaces.Output;
+import org.ulpgc.inefeeder.servicios.general.Interfaces.Publisher;
 import org.ulpgc.inefeeder.servicios.general.helpers.DailyINEFetcher;
 
 import javax.sql.DataSource;
@@ -26,7 +30,6 @@ public class RunDailyINEFetcherCommand implements Command {
     @Override
     public String execute() {
         if (publishToActiveMQ) {
-            // Create a publisher and start fetcher with publishing capabilities
             Publisher publisher = PublisherFactory.createActiveMQPublisher();
             new Thread(new DailyINEFetcherWithPublisher(dataSource, publisher)).start();
             output.setValue("html", "<html><body><h2>Proceso de fetch diario iniciado con publicación a ActiveMQ.</h2><a href='/'>Volver a inicio</a></body></html>");

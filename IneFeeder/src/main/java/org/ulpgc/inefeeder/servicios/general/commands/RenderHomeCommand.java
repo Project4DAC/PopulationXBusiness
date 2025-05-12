@@ -1,8 +1,8 @@
 package org.ulpgc.inefeeder.servicios.general.commands;
 
-import org.ulpgc.inefeeder.servicios.Command;
-import org.ulpgc.inefeeder.servicios.Input;
-import org.ulpgc.inefeeder.servicios.Output;
+import org.ulpgc.inefeeder.servicios.general.Interfaces.Command;
+import org.ulpgc.inefeeder.servicios.general.Interfaces.Input;
+import org.ulpgc.inefeeder.servicios.general.Interfaces.Output;
 
 import static main.java.org.ulpgc.inefeeder.servicios.general.helpers.HtmlUtil.getHtmlFooter;
 import static main.java.org.ulpgc.inefeeder.servicios.general.helpers.HtmlUtil.getHtmlHeader;

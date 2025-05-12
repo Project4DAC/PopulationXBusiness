@@ -3,9 +3,9 @@ package org.ulpgc.inefeeder.commands.update;
 import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
 import org.ulpgc.inefeeder.commands.query.POJO.*;
-import org.ulpgc.inefeeder.servicios.Command;
-import org.ulpgc.inefeeder.servicios.Input;
-import org.ulpgc.inefeeder.servicios.Output;
+import org.ulpgc.inefeeder.servicios.general.Interfaces.Command;
+import org.ulpgc.inefeeder.servicios.general.Interfaces.Input;
+import org.ulpgc.inefeeder.servicios.general.Interfaces.Output;
 
 import java.lang.reflect.Type;
 import java.sql.Connection;

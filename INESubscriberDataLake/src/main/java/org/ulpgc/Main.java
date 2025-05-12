@@ -7,6 +7,8 @@ import org.ulpgc.INESubscriberDataLake.Interfaces.MessageSaver;
 import org.ulpgc.INESubscriberDataLake.services.*;
 
 import java.io.File;
+import java.util.Arrays;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
@@ -15,14 +17,21 @@ public class Main {
         String username = "admin";
         String password = "admin";
         String brokerUrl = "tcp://localhost:61616";
-        String topicName = "INE.Datos.Nuevos";
+        List<String> topicNames = Arrays.asList(
+                "INE.DATOS_TABLA",
+                "INE.METADATOS",
+                "INE.OPERACIONES",
+                "INE.TABLAS_OPERACIONES"
+        );
 
         // Setup data paths
-        String dataLakeRoot = System.getProperty("user.dir") + File.separator + "datalake";
+        String dataLakeRoot = System.getenv("DATALAKE_PATH") != null ?
+                System.getenv("DATALAKE_PATH") :
+                System.getProperty("user.home") + File.separator + "activemq-datalake";
         ensureDirectoriesExist(dataLakeRoot);
 
         // Initialize components
-        Config config = new Config(username, password, brokerUrl, topicName);
+        Config config = new Config(username, password, brokerUrl, topicNames);
         MessageBrokerConnector brokerConnector = new ActiveMQConnector(config);
         MessageSaver messageSaver = new FileMessageSaver(dataLakeRoot + File.separator + "raw");
         MessageProcessor messageProcessor = new MessageProcessor(brokerConnector, messageSaver);

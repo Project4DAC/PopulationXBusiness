@@ -1,16 +1,18 @@
 package org.ulpgc.INESubscriberDataLake.services;
 
+import java.util.List;
+
 public class Config {
     private final String username;
     private final String password;
     private final String brokerUrl;
-    private final String topicName;
+    private final List<String> topicNames;
 
-    public Config(String username, String password, String brokerUrl, String topicName) {
+    public Config(String username, String password, String brokerUrl, List<String> topicNames) {
         this.username = username;
         this.password = password;
         this.brokerUrl = brokerUrl;
-        this.topicName = topicName;
+        this.topicNames = topicNames;
     }
 
     public String getUsername() {
@@ -25,7 +27,7 @@ public class Config {
         return brokerUrl;
     }
 
-    public String getTopicName() {
-        return topicName;
+    public List<String> getTopicName() {
+        return topicNames;
     }
 }

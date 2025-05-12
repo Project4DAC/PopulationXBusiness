@@ -57,6 +57,11 @@ public class DatosTabla {
         @SerializedName(value = "fechaRefFin", alternate = {"fecha_ref_fin"})
         private String fechaRefFin;
 
+        @SerializedName("ultima_modificacion")
+        private long ultimaModificacion;
+
+
+
         public int getId() {
             return id;
         }
@@ -120,5 +125,9 @@ public class DatosTabla {
         public void setFechaRefFin(String fechaRefFin) {
             this.fechaRefFin = fechaRefFin;
         }
+
+        public long getUltimaModificacion() { return ultimaModificacion; }
+
+        public void setUltimaModificacion(long ultimaModificacion) { this.ultimaModificacion = ultimaModificacion; }
     }
 }

@@ -15,7 +15,7 @@ public class Operacion {
     @SerializedName(value = "codigo", alternate = {"Codigo"})
     private String codigo;
 
-    @SerializedName(value = "urlOperacion", alternate = {"Url"})
+    @SerializedName(value = "urlOperacion", alternate = {"Url", "url_operacion"})
     private String urlOperacion;
 
     public String getCodIoE() {

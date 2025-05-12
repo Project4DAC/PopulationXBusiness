@@ -1,6 +1,6 @@
 package org.ulpgc.inefeeder.servicios.general.helpers;
 
-import org.ulpgc.inefeeder.servicios.Command;
+import org.ulpgc.inefeeder.servicios.general.Interfaces.Command;
 import org.ulpgc.inefeeder.servicios.general.commands.CreateTableCommand;
 
 import javax.sql.DataSource;

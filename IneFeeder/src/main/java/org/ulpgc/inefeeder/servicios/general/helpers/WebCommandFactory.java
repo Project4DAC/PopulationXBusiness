@@ -1,8 +1,8 @@
 package org.ulpgc.inefeeder.servicios.general.helpers;
 
-import org.ulpgc.inefeeder.servicios.Command;
-import org.ulpgc.inefeeder.servicios.Input;
-import org.ulpgc.inefeeder.servicios.Output;
+import org.ulpgc.inefeeder.servicios.general.Interfaces.Command;
+import org.ulpgc.inefeeder.servicios.general.Interfaces.Input;
+import org.ulpgc.inefeeder.servicios.general.Interfaces.Output;
 import org.ulpgc.inefeeder.servicios.general.commands.RenderHomeCommand;
 import org.ulpgc.inefeeder.servicios.general.commands.RenderResultCommand;
 

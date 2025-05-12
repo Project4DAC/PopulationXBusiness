@@ -1,7 +1,8 @@
-package org.ulpgc.inefeeder.servicios;
+package org.ulpgc.inefeeder.servicios.general.helpers;
 
 import jakarta.jms.*;
 import org.apache.activemq.ActiveMQConnectionFactory;
+import org.ulpgc.inefeeder.servicios.general.Interfaces.Publisher;
 
 
 /**
@@ -13,10 +14,6 @@ public class ActiveMQPublisher implements Publisher {
     private Session session;
     private boolean connected;
 
-    /**
-     * Creates a new ActiveMQ publisher with the specified broker URL
-     * @param brokerUrl the URL of the ActiveMQ broker (e.g. "tcp://localhost:61616")
-     */
     public ActiveMQPublisher(String brokerUrl) {
         this.brokerUrl = brokerUrl;
         this.connected = false;
@@ -38,7 +35,7 @@ public class ActiveMQPublisher implements Publisher {
             connect();
         }
         
-        Destination dest = session.createQueue(destination);
+        Destination dest = session.createTopic(destination);
         MessageProducer producer = session.createProducer(dest);
         producer.setDeliveryMode(DeliveryMode.PERSISTENT);
         

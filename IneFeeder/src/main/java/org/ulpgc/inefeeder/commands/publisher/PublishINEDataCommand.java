@@ -1,31 +1,25 @@
 package org.ulpgc.inefeeder.commands.publisher;
 
-import org.ulpgc.inefeeder.servicios.Command;
-import org.ulpgc.inefeeder.servicios.Input;
-import org.ulpgc.inefeeder.servicios.Output;
-import org.ulpgc.inefeeder.servicios.Publisher;
-import org.ulpgc.inefeeder.servicios.PublisherFactory;
+import org.ulpgc.inefeeder.servicios.general.Interfaces.Command;
+import org.ulpgc.inefeeder.servicios.general.Interfaces.Input;
+import org.ulpgc.inefeeder.servicios.general.Interfaces.Output;
+import org.ulpgc.inefeeder.servicios.general.Interfaces.Publisher;
+import org.ulpgc.inefeeder.servicios.general.helpers.PublisherFactory;
 
-/**
- * Command to publish INE data to ActiveMQ
- */
+
 public class PublishINEDataCommand implements Command {
     private final Input input;
     private final Output output;
     private final Publisher publisher;
 
-    /**
-     * Creates a new command with the specified input, output, and publisher
-     */
+
     public PublishINEDataCommand(Input input, Output output, Publisher publisher) {
         this.input = input;
         this.output = output;
         this.publisher = publisher;
     }
 
-    /**
-     * Creates a new command with the specified input and output, using the default publisher
-     */
+
     public PublishINEDataCommand(Input input, Output output) {
         this(input, output, PublisherFactory.createActiveMQPublisher());
     }
