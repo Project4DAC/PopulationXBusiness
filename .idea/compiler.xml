@@ -9,7 +9,10 @@
         <module name="INESubscriberDataLake" />
         <module name="BormeSubscriberDataLake" />
         <module name="BormeFeeder" />
+<<<<<<< Updated upstream
         <module name="BusinessUnit" />
+=======
+>>>>>>> Stashed changes
         <module name="IneFeeder" />
       </profile>
     </annotationProcessing>
