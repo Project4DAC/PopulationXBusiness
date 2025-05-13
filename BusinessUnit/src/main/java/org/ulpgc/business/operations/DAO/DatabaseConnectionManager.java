@@ -1,4 +1,4 @@
-package org.ulpgc.business.repository;
+package org.ulpgc.business.operations.DAO;
 
 import org.ulpgc.business.Exceptions.DatabaseException;
 

@@ -2,7 +2,9 @@ package org.ulpgc.business.repository;
 
 import org.ulpgc.business.Exceptions.DatabaseException;
 import org.ulpgc.business.interfaces.TablaRepository;
+import org.ulpgc.business.operations.DAO.DatabaseConnectionManager;
 import org.ulpgc.business.operations.POJO.TablasOperacion;
+import org.ulpgc.business.service.EntityValidator;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

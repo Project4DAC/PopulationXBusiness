@@ -1,4 +1,4 @@
-package org.ulpgc.business.repository;
+package org.ulpgc.business.service;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
