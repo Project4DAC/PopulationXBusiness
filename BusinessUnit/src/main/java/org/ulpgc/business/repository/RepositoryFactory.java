@@ -1,5 +1,6 @@
 package org.ulpgc.business.repository;
 
+import org.ulpgc.business.Exceptions.DatabaseException;
 import org.ulpgc.business.interfaces.OperacionRepository;
 import org.ulpgc.business.interfaces.TablaRepository;
 
