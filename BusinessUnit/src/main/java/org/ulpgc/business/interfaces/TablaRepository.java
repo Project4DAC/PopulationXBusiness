@@ -1,5 +1,9 @@
 package org.ulpgc.business.interfaces;
 
-public interface TablaRepository extends GenericRepository<Tabla, Integer> {
-    List<Tabla> findByOperacionId(int operacionId);
+import org.ulpgc.business.operations.POJO.TablasOperacion;
+
+import java.util.List;
+
+public interface TablaRepository extends GenericRepository<TablasOperacion, Integer> {
+    List<TablasOperacion> findByOperacionId(int operacionId);
 }
