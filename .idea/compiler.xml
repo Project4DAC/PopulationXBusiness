@@ -8,16 +8,11 @@
         <outputRelativeToContentRoot value="true" />
         <module name="INESubscriberDataLake" />
         <module name="BormeSubscriberDataLake" />
+        <module name="IneSubscriberDataMart" />
         <module name="BormeFeeder" />
-<<<<<<< Updated upstream
         <module name="BusinessUnit" />
-=======
->>>>>>> Stashed changes
         <module name="IneFeeder" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="IneSubscriberDataLake" target="23" />
-    </bytecodeTargetLevel>
   </component>
 </project>

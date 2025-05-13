@@ -15,5 +15,6 @@
         <module>BormeSubscriberDataLake</module>
         <module>INESubscriberDataLake</module>
         <module>BusinessUnit</module>
+        <module>IneSubscriberDataMart</module>
     </modules>
 </project>
