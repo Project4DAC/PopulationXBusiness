@@ -1,7 +1,7 @@
 package org.ulpgc.IneSubscriberDataMart.services;
 
-import org.ulpgc.INESubscriberDataLake.Interfaces.MessageBrokerConnector;
-import org.ulpgc.INESubscriberDataLake.Interfaces.MessageSaver;
+import org.ulpgc.IneSubscriberDataMart.Interfaces.MessageBrokerConnector;
+import org.ulpgc.IneSubscriberDataMart.Interfaces.MessageSaver;
 
 public class MessageProcessor {
     private final MessageBrokerConnector brokerConnector;

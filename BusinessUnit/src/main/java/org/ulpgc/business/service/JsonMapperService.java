@@ -5,6 +5,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
+import org.ulpgc.business.operations.DAO.JsonArrayAdapter;
 
 import java.util.List;
 

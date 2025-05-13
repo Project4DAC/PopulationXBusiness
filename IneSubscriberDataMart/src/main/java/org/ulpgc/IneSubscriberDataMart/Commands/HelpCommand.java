@@ -1,5 +1,5 @@
 package org.ulpgc.IneSubscriberDataMart.Commands;
-import org.ulpgc.INESubscriberDataLake.Interfaces.Command;
+import org.ulpgc.IneSubscriberDataMart.Interfaces.Command;
 
 public class HelpCommand implements Command {
     @Override

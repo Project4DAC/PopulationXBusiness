@@ -1,7 +1,7 @@
 package org.ulpgc.IneSubscriberDataMart.Commands;
 
-import org.ulpgc.INESubscriberDataLake.Interfaces.Command;
-import org.ulpgc.INESubscriberDataLake.services.MessageProcessor;
+import org.ulpgc.IneSubscriberDataMart.Interfaces.Command;
+import org.ulpgc.IneSubscriberDataMart.services.MessageProcessor;
 
 public class StopCommand implements Command {
     private final MessageProcessor processor;

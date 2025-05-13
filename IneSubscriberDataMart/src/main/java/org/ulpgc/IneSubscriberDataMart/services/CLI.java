@@ -1,8 +1,8 @@
 package org.ulpgc.IneSubscriberDataMart.services;
 
-import org.ulpgc.INESubscriberDataLake.Interfaces.Command;
-import org.ulpgc.INESubscriberDataLake.Interfaces.DataProcessor;
-import org.ulpgc.INESubscriberDataLake.services.MessageProcessor;
+import org.ulpgc.IneSubscriberDataMart.Commands.*;
+import org.ulpgc.IneSubscriberDataMart.Interfaces.Command;
+import org.ulpgc.IneSubscriberDataMart.Interfaces.DataProcessor;
 
 import java.util.HashMap;
 import java.util.Map;

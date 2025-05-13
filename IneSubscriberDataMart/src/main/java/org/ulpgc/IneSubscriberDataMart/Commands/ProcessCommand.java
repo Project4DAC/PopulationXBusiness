@@ -1,7 +1,7 @@
 package org.ulpgc.IneSubscriberDataMart.Commands;
 
-import org.ulpgc.INESubscriberDataLake.Interfaces.Command;
-import org.ulpgc.INESubscriberDataLake.Interfaces.DataProcessor;
+import org.ulpgc.IneSubscriberDataMart.Interfaces.Command;
+import org.ulpgc.IneSubscriberDataMart.Interfaces.DataProcessor;
 
 public class ProcessCommand implements Command {
     private final DataProcessor dataProcessor;

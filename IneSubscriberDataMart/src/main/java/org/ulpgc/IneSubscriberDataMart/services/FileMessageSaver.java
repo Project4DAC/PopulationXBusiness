@@ -2,7 +2,7 @@ package org.ulpgc.IneSubscriberDataMart.services;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.ulpgc.INESubscriberDataLake.Interfaces.MessageSaver;
+import org.ulpgc.IneSubscriberDataMart.Interfaces.MessageSaver;
 
 import java.io.File;
 import java.io.FileWriter;

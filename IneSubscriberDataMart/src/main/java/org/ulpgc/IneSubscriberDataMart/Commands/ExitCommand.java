@@ -1,8 +1,8 @@
 package org.ulpgc.IneSubscriberDataMart.Commands;
 
-import org.ulpgc.INESubscriberDataLake.Interfaces.Command;
-import org.ulpgc.INESubscriberDataLake.services.CLI;
-import org.ulpgc.INESubscriberDataLake.services.MessageProcessor;
+import org.ulpgc.IneSubscriberDataMart.Interfaces.Command;
+import org.ulpgc.IneSubscriberDataMart.services.CLI;
+import org.ulpgc.IneSubscriberDataMart.services.MessageProcessor;
 
 public class ExitCommand implements Command {
     private final CLI cli;

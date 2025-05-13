@@ -1,6 +1,6 @@
 package org.ulpgc.IneSubscriberDataMart.Commands;
 
-import org.ulpgc.INESubscriberDataLake.Interfaces.Command;
+import org.ulpgc.IneSubscriberDataMart.Interfaces.Command;
 
 import java.io.File;
 import java.nio.file.Files;

@@ -2,8 +2,8 @@ package org.ulpgc.IneSubscriberDataMart.services;
 
 import jakarta.jms.*;
 import org.apache.activemq.ActiveMQConnectionFactory;
-import org.ulpgc.INESubscriberDataLake.Interfaces.MessageBrokerConnector;
-import org.ulpgc.INESubscriberDataLake.services.Config;
+import org.ulpgc.IneSubscriberDataMart.Interfaces.MessageBrokerConnector;
+import org.ulpgc.IneSubscriberDataMart.services.Config;
 
 import java.util.ArrayList;
 import java.util.List;

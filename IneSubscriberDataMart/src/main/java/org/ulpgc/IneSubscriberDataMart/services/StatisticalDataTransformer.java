@@ -2,7 +2,7 @@ package org.ulpgc.IneSubscriberDataMart.services;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.ulpgc.INESubscriberDataLake.Interfaces.DataTransformer;
+import org.ulpgc.IneSubscriberDataMart.Interfaces.DataTransformer;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
