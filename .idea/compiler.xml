@@ -9,6 +9,7 @@
         <module name="INESubscriberDataLake" />
         <module name="BormeSubscriberDataLake" />
         <module name="IneSubscriberDataMart" />
+        <module name="StoreBuilder" />
         <module name="BormeFeeder" />
         <module name="BusinessUnit" />
         <module name="IneFeeder" />

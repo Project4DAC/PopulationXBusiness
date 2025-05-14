@@ -5,8 +5,8 @@ import org.ulpgc.inefeeder.servicios.general.Interfaces.Command;
 import org.ulpgc.inefeeder.servicios.general.Interfaces.Input;
 import org.ulpgc.inefeeder.servicios.general.Interfaces.Output;
 
-import static main.java.org.ulpgc.inefeeder.servicios.general.helpers.HtmlUtil.getHtmlFooter;
-import static main.java.org.ulpgc.inefeeder.servicios.general.helpers.HtmlUtil.getHtmlHeader;
+import static org.ulpgc.inefeeder.servicios.general.helpers.HtmlUtil.getHtmlFooter;
+import static org.ulpgc.inefeeder.servicios.general.helpers.HtmlUtil.getHtmlHeader;
 
 public class RenderResultCommand implements Command {
     private final Input input;

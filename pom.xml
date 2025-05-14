@@ -16,5 +16,6 @@
         <module>INESubscriberDataLake</module>
         <module>BusinessUnit</module>
         <module>IneSubscriberDataMart</module>
+        <module>StoreBuilder</module>
     </modules>
 </project>
