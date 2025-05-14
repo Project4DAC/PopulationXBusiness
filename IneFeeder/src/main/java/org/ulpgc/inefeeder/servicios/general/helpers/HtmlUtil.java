@@ -1,4 +1,4 @@
-package main.java.org.ulpgc.inefeeder.servicios.general.helpers;
+package org.ulpgc.inefeeder.servicios.general.helpers;
 
 public class HtmlUtil {
     public static String getHtmlHeader() {

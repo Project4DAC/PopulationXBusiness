@@ -16,8 +16,13 @@ public class ActiveMQPublisher implements Publisher {
 
     public ActiveMQPublisher(String brokerUrl) {
         this.brokerUrl = brokerUrl;
-        this.connected = false;
+        try {
+            connect();
+        } catch (JMSException e) {
+            System.err.println("Failed to connect to ActiveMQ: " + e.getMessage());
+        }
     }
+
 
     public void connect() throws JMSException {
         if (!connected) {

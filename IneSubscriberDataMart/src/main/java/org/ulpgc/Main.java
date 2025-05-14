@@ -5,6 +5,8 @@ import com.zaxxer.hikari.HikariDataSource;
 import org.ulpgc.IneSubscriberDataMart.Interfaces.DataProcessor;
 import org.ulpgc.IneSubscriberDataMart.Interfaces.MessageBrokerConnector;
 import org.ulpgc.IneSubscriberDataMart.Interfaces.MessageSaver;
+import org.ulpgc.IneSubscriberDataMart.query.ActiveMQConnector;
+import org.ulpgc.IneSubscriberDataMart.query.INETableCommandFactory;
 import org.ulpgc.IneSubscriberDataMart.services.*;
 
 import javax.sql.DataSource;
@@ -32,18 +34,16 @@ public class Main {
 
         }
     }
-    ineDataSource = DatabaseUtil.createDataSource("./INE.db", "INEPool");
-    INETableCommandFactory.createInitializeDatabaseCommand(ineDataSource).execute();
-
-
     private static final Logger LOGGER = Logger.getLogger(Main.class.getName());
     private static final CountDownLatch shutdownLatch = new CountDownLatch(1);
     private static MessageProcessor messageProcessor;
     private static DataProcessor dataProcessor;
 
+
     public static void main(String[] args) {
         configureLogging();
-
+        ineDataSource = DatabaseUtil.createDataSource("./INE.db", "INEPool");
+        INETableCommandFactory.createInitializeDatabaseCommand(ineDataSource).execute();
         LOGGER.info("Starting INE Subscriber Data Mart Background Service...");
 
         // Initialize configuration
