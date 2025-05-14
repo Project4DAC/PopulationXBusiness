@@ -1,6 +1,6 @@
 package org.ulpgc.inefeeder.servicios.general.helpers;
 
-import org.ulpgc.inefeeder.commands.update.INEFetchAndSaveDataCommand;
+import org.ulpgc.inefeeder.commands.update.INEFetchDataCommand;
 import org.ulpgc.inefeeder.servicios.general.Interfaces.Input;
 import org.ulpgc.inefeeder.servicios.general.Interfaces.Output;
 
@@ -74,7 +74,7 @@ public class DailyINEFetcher implements Runnable {
             input.setValue("language", "es");
             input.setValue("inputValue", inputValue);
 
-            new INEFetchAndSaveDataCommand(input, output, dataSource).execute();
+            new INEFetchDataCommand(input, output).execute();
             System.out.println("Consulta realizada: " + function + (inputValue != null ? " (" + inputValue + ")" : ""));
             Thread.sleep(PAUSE_MS);
         } catch (Exception e) {

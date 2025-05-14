@@ -6,7 +6,7 @@ import com.zaxxer.hikari.HikariDataSource;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
-import org.ulpgc.inefeeder.commands.update.INEFetchAndSaveDataCommand;
+import org.ulpgc.inefeeder.commands.update.INEFetchDataCommand;
 import org.ulpgc.inefeeder.servicios.general.Interfaces.Input;
 import org.ulpgc.inefeeder.servicios.general.Interfaces.Output;
 import org.ulpgc.inefeeder.servicios.general.Interfaces.Publisher;
@@ -18,24 +18,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Main {
-    private static DataSource ineDataSource;
-
-    public static class DatabaseUtil {
-        public static HikariDataSource createDataSource(String dbPath, String poolName) {
-            HikariConfig config = new HikariConfig();
-            config.setJdbcUrl("jdbc:sqlite:" + dbPath);
-            config.setDriverClassName("org.sqlite.JDBC");
-            config.setMaximumPoolSize(1);
-            config.setPoolName(poolName);
-            return new HikariDataSource(config);
-
-        }
-    }
 
     public static void main(String[] args) {
-        ineDataSource = DatabaseUtil.createDataSource("./INE.db", "INEPool");
 
-        INETableCommandFactory.createInitializeDatabaseCommand(ineDataSource).execute();
         ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
         Runnable dailyTask = new RunDailyINEFetcherCommand(ineDataSource);
 
@@ -68,7 +53,7 @@ public class Main {
             Input input = createINEInput(ctx);
             Output output = new SimpleOutput();
 
-            new INEFetchAndSaveDataCommand(input, output, ineDataSource).execute();
+            new INEFetchDataCommand(input, output).execute();
 
             String jsonResponse = output.getValue("jsonResponse");
             String generatedUrl = output.getValue("url");

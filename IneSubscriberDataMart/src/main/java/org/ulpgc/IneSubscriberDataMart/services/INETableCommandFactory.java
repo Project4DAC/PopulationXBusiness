@@ -1,7 +1,7 @@
-package org.ulpgc.inefeeder.servicios.general.helpers;
+package org.ulpgc.IneSubscriberDataMart.services;
 
-import org.ulpgc.inefeeder.servicios.general.Interfaces.Command;
-import org.ulpgc.inefeeder.servicios.general.commands.CreateTableCommand;
+import org.ulpgc.IneSubscriberDataMart.Interfaces.Command;
+import org.ulpgc.IneSubscriberDataMart.CreateTableCommand;
 
 import javax.sql.DataSource;
 import java.util.Arrays;

@@ -1,6 +1,6 @@
 package org.ulpgc.inefeeder.servicios.general.helpers;
 
-import org.ulpgc.inefeeder.commands.update.INEFetchAndSaveDataCommand;
+import org.ulpgc.inefeeder.commands.update.INEFetchDataCommand;
 import org.ulpgc.inefeeder.commands.publisher.PublishINEDataCommand;
 import org.ulpgc.inefeeder.servicios.general.Interfaces.Input;
 import org.ulpgc.inefeeder.servicios.general.Interfaces.Output;
@@ -93,8 +93,7 @@ public class DailyINEFetcherWithPublisher implements Runnable {
             input.setValue("language", "es");
             input.setValue("inputValue", inputValue);
 
-            // Fetch and save data to database
-            new INEFetchAndSaveDataCommand(input, output, dataSource).execute();
+            new INEFetchDataCommand(input, output).execute();
             System.out.println("Consulta realizada: " + function + (inputValue != null ? " (" + inputValue + ")" : ""));
             
             // Publish to ActiveMQ if enabled

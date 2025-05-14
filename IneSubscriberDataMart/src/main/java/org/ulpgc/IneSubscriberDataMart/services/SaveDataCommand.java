@@ -1,4 +1,4 @@
-package org.ulpgc.inefeeder.commands.update;
+package org.ulpgc.IneSubscriberDataMart.services;
 
 import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;

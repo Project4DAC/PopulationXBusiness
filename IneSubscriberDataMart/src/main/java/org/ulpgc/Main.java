@@ -1,10 +1,13 @@
 package org.ulpgc;
 
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
 import org.ulpgc.IneSubscriberDataMart.Interfaces.DataProcessor;
 import org.ulpgc.IneSubscriberDataMart.Interfaces.MessageBrokerConnector;
 import org.ulpgc.IneSubscriberDataMart.Interfaces.MessageSaver;
 import org.ulpgc.IneSubscriberDataMart.services.*;
 
+import javax.sql.DataSource;
 import java.io.File;
 import java.util.Arrays;
 import java.util.List;
@@ -15,6 +18,24 @@ import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
 public class Main {
+
+    private static DataSource ineDataSource;
+
+    public static class DatabaseUtil {
+        public static HikariDataSource createDataSource(String dbPath, String poolName) {
+            HikariConfig config = new HikariConfig();
+            config.setJdbcUrl("jdbc:sqlite:" + dbPath);
+            config.setDriverClassName("org.sqlite.JDBC");
+            config.setMaximumPoolSize(1);
+            config.setPoolName(poolName);
+            return new HikariDataSource(config);
+
+        }
+    }
+    ineDataSource = DatabaseUtil.createDataSource("./INE.db", "INEPool");
+    INETableCommandFactory.createInitializeDatabaseCommand(ineDataSource).execute();
+
+
     private static final Logger LOGGER = Logger.getLogger(Main.class.getName());
     private static final CountDownLatch shutdownLatch = new CountDownLatch(1);
     private static MessageProcessor messageProcessor;

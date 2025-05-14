@@ -5,43 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ca3111e5-42fd-47f6-9b96-9517c6d36c0f" name="Changes" comment="Forgot to work on production. Fixing that">
-      <change afterPath="$PROJECT_DIR$/IneSubscriberDataMart/src/main/java/org/ulpgc/IneSubscriberDataMart/services/ReportGenerator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BormeSubscriberDataLake/target/BormeSubscriberDataLake-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/BormeSubscriberDataLake/target/BormeSubscriberDataLake-1.0-SNAPSHOT.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BormeSubscriberDataLake/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/BormeSubscriberDataLake/target/maven-archiver/pom.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BusinessUnit/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/BusinessUnit/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BusinessUnit/src/main/java/org/ulpgc/business/service/EntityValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/BusinessUnit/src/main/java/org/ulpgc/business/service/EntityValidator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BusinessUnit/src/main/java/org/ulpgc/business/service/JsonMapperService.java" beforeDir="false" afterPath="$PROJECT_DIR$/BusinessUnit/src/main/java/org/ulpgc/business/service/JsonMapperService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BusinessUnit/target/BusinessUnit-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/BusinessUnit/target/BusinessUnit-1.0-SNAPSHOT.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BusinessUnit/target/classes/org/ulpgc/business/service/EntityValidator$ValidationException.class" beforeDir="false" afterPath="$PROJECT_DIR$/BusinessUnit/target/classes/org/ulpgc/business/service/EntityValidator$ValidationException.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BusinessUnit/target/classes/org/ulpgc/business/service/EntityValidator.class" beforeDir="false" afterPath="$PROJECT_DIR$/BusinessUnit/target/classes/org/ulpgc/business/service/EntityValidator.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BusinessUnit/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/BusinessUnit/target/maven-archiver/pom.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/INESubscriberDataLake/target/INESubscriberDataLake-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/INESubscriberDataLake/target/INESubscriberDataLake-1.0-SNAPSHOT.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/INESubscriberDataLake/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/INESubscriberDataLake/target/maven-archiver/pom.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IneFeeder/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/IneFeeder/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IneFeeder/src/main/java/org/ulpgc/inefeeder/commands/update/INEFetchAndSaveDataCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/IneFeeder/src/main/java/org/ulpgc/inefeeder/commands/update/INEFetchDataCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IneFeeder/src/main/java/org/ulpgc/inefeeder/commands/update/ParseAndSaveJsonCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/IneSubscriberDataMart/src/main/java/org/ulpgc/IneSubscriberDataMart/services/ParseAndSaveJsonCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IneFeeder/src/main/java/org/ulpgc/inefeeder/commands/update/SaveDataCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/IneSubscriberDataMart/src/main/java/org/ulpgc/IneSubscriberDataMart/services/SaveDataCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IneFeeder/src/main/java/org/ulpgc/inefeeder/servicios/general/commands/CreateTableCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/IneSubscriberDataMart/src/main/java/org/ulpgc/IneSubscriberDataMart/CreateTableCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IneFeeder/src/main/java/org/ulpgc/inefeeder/servicios/general/helpers/DailyINEFetcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/IneFeeder/src/main/java/org/ulpgc/inefeeder/servicios/general/helpers/DailyINEFetcher.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IneFeeder/src/main/java/org/ulpgc/inefeeder/servicios/general/helpers/DailyINEFetcherWithPublisher.java" beforeDir="false" afterPath="$PROJECT_DIR$/IneFeeder/src/main/java/org/ulpgc/inefeeder/servicios/general/helpers/DailyINEFetcherWithPublisher.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IneFeeder/src/main/java/org/ulpgc/inefeeder/servicios/general/helpers/INETableCommandFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/IneSubscriberDataMart/src/main/java/org/ulpgc/IneSubscriberDataMart/services/INETableCommandFactory.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/IneSubscriberDataMart/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/IneSubscriberDataMart/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IneSubscriberDataMart/src/main/java/org/ulpgc/IneSubscriberDataMart/Commands/ExitCommand.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/IneSubscriberDataMart/src/main/java/org/ulpgc/IneSubscriberDataMart/Commands/FilesCommand.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/IneSubscriberDataMart/src/main/java/org/ulpgc/IneSubscriberDataMart/Commands/HelpCommand.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/IneSubscriberDataMart/src/main/java/org/ulpgc/IneSubscriberDataMart/Commands/ProcessCommand.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/IneSubscriberDataMart/src/main/java/org/ulpgc/IneSubscriberDataMart/Commands/StatusCommand.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/IneSubscriberDataMart/src/main/java/org/ulpgc/IneSubscriberDataMart/Commands/StopCommand.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/IneSubscriberDataMart/src/main/java/org/ulpgc/IneSubscriberDataMart/services/CLI.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/IneSubscriberDataMart/src/main/java/org/ulpgc/IneSubscriberDataMart/services/FileMessageSaver.java" beforeDir="false" afterPath="$PROJECT_DIR$/IneSubscriberDataMart/src/main/java/org/ulpgc/IneSubscriberDataMart/services/FileMessageSaver.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IneSubscriberDataMart/src/main/java/org/ulpgc/IneSubscriberDataMart/services/MessageProcessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/IneSubscriberDataMart/src/main/java/org/ulpgc/IneSubscriberDataMart/services/MessageProcessor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IneSubscriberDataMart/src/main/java/org/ulpgc/IneSubscriberDataMart/services/StatisticalFactTransformer.java" beforeDir="false" afterPath="$PROJECT_DIR$/IneSubscriberDataMart/src/main/java/org/ulpgc/IneSubscriberDataMart/services/StatisticalFactTransformer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/IneSubscriberDataMart/src/main/java/org/ulpgc/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/IneSubscriberDataMart/src/main/java/org/ulpgc/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IneSubscriberDataMart/target/classes/org/ulpgc/IneSubscriberDataMart/Commands/ExitCommand.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/IneSubscriberDataMart/target/classes/org/ulpgc/IneSubscriberDataMart/Commands/HelpCommand.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/IneSubscriberDataMart/target/classes/org/ulpgc/IneSubscriberDataMart/Commands/ProcessCommand.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/IneSubscriberDataMart/target/classes/org/ulpgc/IneSubscriberDataMart/Commands/StatusCommand.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/IneSubscriberDataMart/target/classes/org/ulpgc/IneSubscriberDataMart/Commands/StopCommand.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/IneSubscriberDataMart/target/classes/org/ulpgc/IneSubscriberDataMart/services/CLI.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/IneSubscriberDataMart/target/classes/org/ulpgc/IneSubscriberDataMart/services/FileMessageSaver.class" beforeDir="false" afterPath="$PROJECT_DIR$/IneSubscriberDataMart/target/classes/org/ulpgc/IneSubscriberDataMart/services/FileMessageSaver.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IneSubscriberDataMart/target/classes/org/ulpgc/IneSubscriberDataMart/services/MessageProcessor.class" beforeDir="false" afterPath="$PROJECT_DIR$/IneSubscriberDataMart/target/classes/org/ulpgc/IneSubscriberDataMart/services/MessageProcessor.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IneSubscriberDataMart/target/classes/org/ulpgc/IneSubscriberDataMart/services/StatisticalFactTransformer.class" beforeDir="false" afterPath="$PROJECT_DIR$/IneSubscriberDataMart/target/classes/org/ulpgc/IneSubscriberDataMart/services/StatisticalFactTransformer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IneSubscriberDataMart/target/classes/org/ulpgc/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/IneSubscriberDataMart/target/classes/org/ulpgc/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IneSubscriberDataMart/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/IneSubscriberDataMart/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IneSubscriberDataMart/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/IneSubscriberDataMart/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -136,7 +110,7 @@
       <workItem from="1746700533638" duration="10798000" />
       <workItem from="1746989871957" duration="6221000" />
       <workItem from="1747071520850" duration="2977000" />
-      <workItem from="1747213058572" duration="99000" />
+      <workItem from="1747213058572" duration="1525000" />
     </task>
     <task id="LOCAL-00001" summary="Forgot to work on production. Fixing that">
       <option name="closed" value="true" />
