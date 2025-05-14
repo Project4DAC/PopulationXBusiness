@@ -16,11 +16,11 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class FileMessageSaver implements MessageSaver {
-    private final String basePath;
+    private final String stagingPath;
     private final HttpClient httpClient;
 
-    public FileMessageSaver(String basePath) {
-        this.basePath = basePath;
+    public FileMessageSaver(String stagingPath) {
+        this.stagingPath = stagingPath;
         this.httpClient = HttpClient.newBuilder()
                 .connectTimeout(Duration.ofSeconds(10))
                 .build();
@@ -59,7 +59,8 @@ public class FileMessageSaver implements MessageSaver {
             // Guardar notificación original
             String notificationFilename = "ine_notification_" + timestamp + ".json";
             saveToFile(rawMessage, notificationFilename);
-            System.out.println("INE Notification saved to DataLake: " + basePath + File.separator + notificationFilename);
+            System.out.println("INE Notification saved to DataMart staging area: " +
+                    stagingPath + File.separator + notificationFilename);
 
             // Si existe URL, descargar y guardar el contenido
             if (url != null && !url.isEmpty()) {
@@ -69,7 +70,8 @@ public class FileMessageSaver implements MessageSaver {
                             (!datasetId.isEmpty() ? datasetId + "_" : "") +
                             (!date.isEmpty() ? date.replaceAll("-", "") : timestamp) + ".json";
                     saveToFile(content, contentFilename);
-                    System.out.println("INE data saved to DataLake: " + basePath + File.separator + contentFilename);
+                    System.out.println("INE data saved to DataMart staging area: " +
+                            stagingPath + File.separator + contentFilename);
                 }
             }
         } catch (Exception e) {
@@ -79,7 +81,7 @@ public class FileMessageSaver implements MessageSaver {
     }
 
     private void saveToFile(String content, String filename) throws IOException {
-        File file = new File(basePath + File.separator + filename);
+        File file = new File(stagingPath + File.separator + filename);
         file.getParentFile().mkdirs();
 
         try (FileWriter writer = new FileWriter(file)) {

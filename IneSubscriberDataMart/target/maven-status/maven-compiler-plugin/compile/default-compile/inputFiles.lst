@@ -1,5 +1,6 @@
 /home/ancor/Documentos/GitHub/BusXpop/IneSubscriberDataMart/src/main/java/org/ulpgc/IneSubscriberDataMart/services/MessageProcessor.java
 /home/ancor/Documentos/GitHub/BusXpop/IneSubscriberDataMart/src/main/java/org/ulpgc/IneSubscriberDataMart/Commands/ProcessCommand.java
+/home/ancor/Documentos/GitHub/BusXpop/IneSubscriberDataMart/src/main/java/org/ulpgc/IneSubscriberDataMart/services/ReportGenerator.java
 /home/ancor/Documentos/GitHub/BusXpop/IneSubscriberDataMart/src/main/java/org/ulpgc/IneSubscriberDataMart/Commands/StatusCommand.java
 /home/ancor/Documentos/GitHub/BusXpop/IneSubscriberDataMart/src/main/java/org/ulpgc/IneSubscriberDataMart/services/CLI.java
 /home/ancor/Documentos/GitHub/BusXpop/IneSubscriberDataMart/src/main/java/org/ulpgc/IneSubscriberDataMart/Commands/ExitCommand.java
