@@ -4,17 +4,19 @@ import org.ulpgc.StoreBuilder.Commands.*;
 import org.ulpgc.StoreBuilder.Interfaces.Command;
 import org.ulpgc.StoreBuilder.Interfaces.DataProcessor;
 
+import java.util.Map;
 import java.util.Scanner;
 
 public class CommandLineInterface {
-    private final MessageProcessor processor;
-    private final DataProcessor dataProcessor;
+    private final Map<String, MessageProcessor> processors;
+    private final Map<String, DataProcessor> dataProcessors;
     private final Scanner scanner;
     private boolean running = true;
 
-    public CommandLineInterface(MessageProcessor processor, DataProcessor dataProcessor) {
-        this.processor = processor;
-        this.dataProcessor = dataProcessor;
+    public CommandLineInterface(Map<String, MessageProcessor> processors,
+                                Map<String, DataProcessor> dataProcessors) {
+        this.processors = processors;
+        this.dataProcessors = dataProcessors;
         this.scanner = new Scanner(System.in);
     }
 
@@ -38,19 +40,48 @@ public class CommandLineInterface {
     }
 
     private Command parseCommand(String input) {
-        if (input.equalsIgnoreCase("help")) {
-            return new HelpCommand();
-        } else if (input.equalsIgnoreCase("status")) {
-            return new StatusCommand(processor);
-        } else if (input.equalsIgnoreCase("stop")) {
-            return new StopCommand(processor, this);
-        } else if (input.equalsIgnoreCase("exit")) {
-            return new ExitCommand(processor, this);
-        } else if (input.equalsIgnoreCase("files")) {
-            return new ListFilesCommand();
-        } else if (input.equalsIgnoreCase("process")) {
-            return new ProcessCommand(dataProcessor);
+        String[] parts = input.split("\\s+");
+        if (parts.length == 0) return null;
+
+        String commandName = parts[0].toLowerCase();
+
+        switch (commandName) {
+            case "help":
+                return new HelpCommand();
+
+            case "status":
+            case "stop":
+            case "exit":
+            case "process":
+                if (parts.length < 2) {
+                    System.out.println("Usage: " + commandName + " <source>");
+                    return null;
+                }
+                String source = parts[1].toLowerCase();
+                MessageProcessor processor = processors.get(source);
+                DataProcessor dataProcessor = dataProcessors.get(source);
+
+                if (processor == null || dataProcessor == null) {
+                    System.out.println("Unknown source: " + source);
+                    return null;
+                }
+
+                switch (commandName) {
+                    case "status":
+                        return new StatusCommand(processor);
+                    case "stop":
+                        return new StopCommand(processor, this);
+                    case "exit":
+                        return new ExitCommand(processor, this);
+                    case "process":
+                        return new ProcessCommand(dataProcessor);
+                }
+                break;
+
+            case "files":
+                return new ListFilesCommand();
         }
+
         return null;
     }
 

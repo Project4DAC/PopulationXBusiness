@@ -1,20 +1,17 @@
 package org.ulpgc.BormeFeeder.services.general.helpers;
 
 import org.ulpgc.BormeFeeder.commands.query.BuildURLCommand;
-import org.ulpgc.BormeFeeder.commands.update.BormeFetchAndSaveDataCommand;
+import org.ulpgc.BormeFeeder.commands.update.BormeFetchDataCommand;
 import org.ulpgc.BormeFeeder.services.Input;
 import org.ulpgc.BormeFeeder.services.Output;
 import org.ulpgc.BormeFeeder.publisher.BormePublisher;
 
 import java.time.LocalDate;
-import javax.sql.DataSource;
 
 public class DailyBormeFetcher implements Runnable {
-    private final DataSource dataSource;
     private final BormePublisher publisher;
 
-    public DailyBormeFetcher(DataSource dataSource) {
-        this.dataSource = dataSource;
+    public DailyBormeFetcher() {
         this.publisher = new BormePublisher();
     }
 
@@ -41,7 +38,7 @@ public class DailyBormeFetcher implements Runnable {
 
                 if (url != null && !url.isEmpty()) {
                     input.setValue("url", url);
-                    new BormeFetchAndSaveDataCommand(input, output, dataSource).execute();
+                    new BormeFetchDataCommand(input, output).execute();
                     System.out.println("Successfully fetched BORME data for: " + targetDate);
 
                     try {

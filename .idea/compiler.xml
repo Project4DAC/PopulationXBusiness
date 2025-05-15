@@ -6,8 +6,6 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="INESubscriberDataLake" />
-        <module name="BormeSubscriberDataLake" />
         <module name="IneSubscriberDataMart" />
         <module name="StoreBuilder" />
         <module name="BormeFeeder" />
@@ -15,5 +13,9 @@
         <module name="IneFeeder" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="BormeSubscriberDataLake" target="21" />
+      <module name="INESubscriberDataLake" target="21" />
+    </bytecodeTargetLevel>
   </component>
 </project>

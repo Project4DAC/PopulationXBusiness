@@ -4,43 +4,38 @@ import org.ulpgc.StoreBuilder.Interfaces.DataProcessor;
 import org.ulpgc.StoreBuilder.Interfaces.MessageBrokerConnector;
 import org.ulpgc.StoreBuilder.Interfaces.MessageSaver;
 import org.ulpgc.StoreBuilder.processors.BormeDataProcessor;
+import org.ulpgc.StoreBuilder.processors.INEDataProcessor;
 import org.ulpgc.StoreBuilder.services.*;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.Arrays;
-import java.util.List;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
+import java.nio.file.*;
+import java.util.*;
+import java.util.concurrent.*;
 
 public class Main {
     private static final String DATALAKE_ROOT = System.getenv("DATALAKE_PATH") != null ?
             System.getenv("DATALAKE_PATH") :
             System.getProperty("user.home") + File.separator + "activemq-datalake";
+
     private static final String RAW_ZONE = "raw";
     private static final String PROCESSED_ZONE = "processed";
     private static final String CONSUMPTION_ZONE = "consumption";
 
-    // Configure the processing interval (in minutes)
     private static final int PROCESSING_INTERVAL_MINUTES = 5;
+
+    // Shared maps for CLI
+    private static final Map<String, MessageProcessor> processors = new HashMap<>();
+    private static final Map<String, DataProcessor> dataProcessors = new HashMap<>();
 
     public static void main(String[] args) {
         System.out.println("Starting Combined BORME/INE Data Lake Application...");
 
-        // Setup the DataLake structure
         setupDataLake();
 
-        // Initialize and start BORME components
         startBormeComponents();
-
-        // Initialize and start INE components
         startINEComponents();
 
-        // Start the combined CLI
         startCLI();
     }
 
@@ -50,13 +45,14 @@ public class Main {
 
         MessageBrokerConnector bormeConnector = new ActiveMQConnector(bormeConfig);
         MessageSaver bormeMessageSaver = new FileMessageSaver(rawPath);
-        MessageProcessor bormeProcessor =
-                new MessageProcessor(bormeConnector, bormeMessageSaver);
+        MessageProcessor bormeProcessor = new MessageProcessor(bormeConnector, bormeMessageSaver);
+        DataProcessor bormeDataProcessor = new BormeDataProcessor(DATALAKE_ROOT);
 
-        DataProcessor bormeDataProcessor =
-                new BormeDataProcessor(DATALAKE_ROOT);
+        // Store references for CLI
+        processors.put("borme", bormeProcessor);
+        dataProcessors.put("borme", bormeDataProcessor);
 
-        // Set up scheduled processing task for BORME
+        // Schedule BORME processor
         ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
         scheduler.scheduleAtFixedRate(() -> {
             System.out.println("Starting automated BORME data processing...");
@@ -64,35 +60,36 @@ public class Main {
             System.out.println("Automated BORME data processing complete.");
         }, 1, PROCESSING_INTERVAL_MINUTES, TimeUnit.MINUTES);
 
-        System.out.println("BORME data processing scheduled every " +
-                PROCESSING_INTERVAL_MINUTES + " minutes.");
-
         bormeProcessor.startProcessing();
 
+        System.out.println("BORME data processing scheduled every " + PROCESSING_INTERVAL_MINUTES + " minutes.");
     }
+
 
     private static void startINEComponents() {
         Config ineConfig = readINEConfig();
         String rawPath = DATALAKE_ROOT + File.separator + RAW_ZONE;
 
-        // INE specific components
         MessageBrokerConnector ineConnector = new ActiveMQConnector(ineConfig);
         MessageSaver ineMessageSaver = new FileMessageSaver(rawPath);
-        MessageProcessor ineProcessor =
-                new MessageProcessor(ineConnector, ineMessageSaver);
+        MessageProcessor ineProcessor = new MessageProcessor(ineConnector, ineMessageSaver);
+        DataProcessor ineDataProcessor = new INEDataProcessor(DATALAKE_ROOT);
 
-        // Initialize the DataProcessor for handling zones
-        DataProcessor ineDataProcessor =
-                new INEDataProcessor(DATALAKE_ROOT);
+        ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+        scheduler.scheduleAtFixedRate(() -> {
+            System.out.println("Starting automated INE data processing...");
+            ineDataProcessor.process();
+            System.out.println("Automated INE data processing complete.");
+        }, 1, PROCESSING_INTERVAL_MINUTES, TimeUnit.MINUTES);
 
-        // Start processing incoming messages
         ineProcessor.startProcessing();
+
+        System.out.println("INE data processing scheduled every " + PROCESSING_INTERVAL_MINUTES + " minutes.");
     }
 
     private static void startCLI() {
-        CommandLineInterface cli = new CommandLineInterface(messageProcessor, dataProcessor);
+        CommandLineInterface cli = new CommandLineInterface(processors, dataProcessors);
         cli.start();
-    }
     }
 
     private static Config readBormeConfig() {
@@ -108,7 +105,7 @@ public class Main {
             throw new RuntimeException("Environment variables ACTIVEMQ_USER and ACTIVEMQ_PASSWORD must be set");
         }
 
-        return new Config(user, password, brokerUrl, topicName);
+        return new Config(user, password, brokerUrl, Collections.singletonList(topicName));
     }
 
     private static Config readINEConfig() {
