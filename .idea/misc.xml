@@ -11,6 +11,7 @@
       <set>
         <option value="$PROJECT_DIR$/BormeSubscriberDataLake/pom.xml" />
         <option value="$PROJECT_DIR$/INESubscriberDataLake/pom.xml" />
+        <option value="$PROJECT_DIR$/IneSubscriberDataMart/pom.xml" />
       </set>
     </option>
   </component>
