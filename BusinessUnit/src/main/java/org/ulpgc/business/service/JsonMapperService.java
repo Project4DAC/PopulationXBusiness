@@ -1,0 +1,28 @@
+package org.ulpgc.business.service;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.reflect.TypeToken;
+import org.ulpgc.business.operations.DAO.JsonArrayAdapter;
+
+import java.util.List;
+// TODO Hacer modulo del activemq
+public class JsonMapperService {
+    private final Gson gson;
+
+    public JsonMapperService() {
+        this.gson = new GsonBuilder()
+                .registerTypeAdapter(JsonArray.class, new JsonArrayAdapter())
+                .create();
+    }
+
+    public <T> T fromJson(JsonObject jsonObject, Class<T> clazz) {
+        return gson.fromJson(jsonObject, clazz);
+    }
+
+    public <T> List<T> fromJsonArray(JsonArray jsonArray, Class<T> clazz) {
+        return gson.fromJson(jsonArray, TypeToken.getParameterized(List.class, clazz).getType());
+    }
+}

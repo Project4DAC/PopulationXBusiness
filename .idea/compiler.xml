@@ -6,17 +6,17 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="StoreBuilder" />
         <module name="BormeFeeder" />
+        <module name="BusinessUnit" />
         <module name="IneFeeder" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="BormeSubscriberDataLake" target="21" />
-      <module name="BusinessUnit" target="21" />
       <module name="INESubscriberDataLake" target="21" />
       <module name="IneSubscriberDataMart" target="21" />
       <module name="MainLauncher" target="21" />
-      <module name="StoreBuilder" target="21" />
     </bytecodeTargetLevel>
   </component>
 </project>

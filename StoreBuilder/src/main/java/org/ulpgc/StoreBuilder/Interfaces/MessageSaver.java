@@ -1,0 +1,10 @@
+//
+// Source code recreated from a .class file by IntelliJ IDEA
+// (powered by FernFlower decompiler)
+//
+
+package org.ulpgc.StoreBuilder.Interfaces;
+
+public interface MessageSaver {
+    void saveMessage(String var1);
+}
