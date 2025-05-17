@@ -5,39 +5,36 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ca3111e5-42fd-47f6-9b96-9517c6d36c0f" name="Changes" comment="Forgot to work on production. Fixing that">
-      <change afterPath="$PROJECT_DIR$/StoreBuilder/src/main/java/org/ulpgc/StoreBuilder/Commands/ExitCommand.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/StoreBuilder/src/main/java/org/ulpgc/StoreBuilder/Commands/HelpCommand.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/StoreBuilder/src/main/java/org/ulpgc/StoreBuilder/Commands/ListFilesCommand.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/StoreBuilder/src/main/java/org/ulpgc/StoreBuilder/Commands/ProcessCommand.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/StoreBuilder/src/main/java/org/ulpgc/StoreBuilder/Commands/StatusCommand.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/StoreBuilder/src/main/java/org/ulpgc/StoreBuilder/Commands/StopCommand.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/StoreBuilder/src/main/java/org/ulpgc/StoreBuilder/Interfaces/Command.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/StoreBuilder/src/main/java/org/ulpgc/StoreBuilder/Interfaces/DataProcessor.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/StoreBuilder/src/main/java/org/ulpgc/StoreBuilder/Interfaces/DataTransformer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/StoreBuilder/src/main/java/org/ulpgc/StoreBuilder/Interfaces/MessageBrokerConnector.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/StoreBuilder/src/main/java/org/ulpgc/StoreBuilder/Interfaces/MessageSaver.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/StoreBuilder/src/main/java/org/ulpgc/StoreBuilder/processors/BormeDataProcessor.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/StoreBuilder/src/main/java/org/ulpgc/StoreBuilder/processors/ConsumptionTransformer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/StoreBuilder/src/main/java/org/ulpgc/StoreBuilder/processors/ContentTransformer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/StoreBuilder/src/main/java/org/ulpgc/StoreBuilder/processors/INEDataProcessor.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/StoreBuilder/src/main/java/org/ulpgc/StoreBuilder/processors/NotificationTransformer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/StoreBuilder/src/main/java/org/ulpgc/StoreBuilder/services/ActiveMQConnector.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/StoreBuilder/src/main/java/org/ulpgc/StoreBuilder/services/Config.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/StoreBuilder/src/main/java/org/ulpgc/StoreBuilder/services/FileMessageSaver.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/StoreBuilder/src/main/java/org/ulpgc/StoreBuilder/services/MessageProcessor.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/StoreBuilder/src/main/java/org/ulpgc/StoreBuilder/services/NotificationTransformer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/StoreBuilder/src/main/java/org/ulpgc/StoreBuilder/services/StatisticalDataTransformer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/StoreBuilder/src/main/java/org/ulpgc/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BusinessUnit/src/main/java/org/ulpgc/business/analysis/SocioeconomicImpactAnalyzer.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BusinessUnit/src/main/java/org/ulpgc/business/operations/DAO/DatoDAO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BusinessUnit/src/main/java/org/ulpgc/business/operations/DAO/IndicadorDAO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BusinessUnit/src/main/java/org/ulpgc/business/operations/POJO/Dato.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BusinessUnit/src/main/java/org/ulpgc/business/operations/POJO/Indicador.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoreBuilder/src/main/java/org/ulpgc/StoreBuilder/Commands/ExitCommand.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoreBuilder/src/main/java/org/ulpgc/StoreBuilder/Commands/HelpCommand.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoreBuilder/src/main/java/org/ulpgc/StoreBuilder/Commands/ListFilesCommand.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoreBuilder/src/main/java/org/ulpgc/StoreBuilder/Commands/ProcessCommand.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoreBuilder/src/main/java/org/ulpgc/StoreBuilder/Commands/StatusCommand.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoreBuilder/src/main/java/org/ulpgc/StoreBuilder/Commands/StopCommand.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoreBuilder/target/classes/org/ulpgc/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/StoreBuilder/target/classes/org/ulpgc/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoreBuilder/target/classes/org/ulpgc/StoreBuilder/Commands/ExitCommand.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoreBuilder/target/classes/org/ulpgc/StoreBuilder/Commands/HelpCommand.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoreBuilder/target/classes/org/ulpgc/StoreBuilder/Commands/ListFilesCommand.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoreBuilder/target/classes/org/ulpgc/StoreBuilder/Commands/ProcessCommand.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoreBuilder/target/classes/org/ulpgc/StoreBuilder/Commands/StatusCommand.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoreBuilder/target/classes/org/ulpgc/StoreBuilder/Commands/StopCommand.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoreBuilder/target/classes/org/ulpgc/StoreBuilder/processors/BormeDataProcessor.class" beforeDir="false" afterPath="$PROJECT_DIR$/StoreBuilder/target/classes/org/ulpgc/StoreBuilder/processors/BormeDataProcessor.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoreBuilder/target/classes/org/ulpgc/StoreBuilder/processors/ConsumptionTransformer.class" beforeDir="false" afterPath="$PROJECT_DIR$/StoreBuilder/target/classes/org/ulpgc/StoreBuilder/processors/ConsumptionTransformer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoreBuilder/target/classes/org/ulpgc/StoreBuilder/processors/ContentTransformer.class" beforeDir="false" afterPath="$PROJECT_DIR$/StoreBuilder/target/classes/org/ulpgc/StoreBuilder/processors/ContentTransformer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoreBuilder/target/classes/org/ulpgc/StoreBuilder/processors/INEDataProcessor.class" beforeDir="false" afterPath="$PROJECT_DIR$/StoreBuilder/target/classes/org/ulpgc/StoreBuilder/processors/INEDataProcessor.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoreBuilder/target/classes/org/ulpgc/StoreBuilder/processors/NotificationTransformer.class" beforeDir="false" afterPath="$PROJECT_DIR$/StoreBuilder/target/classes/org/ulpgc/StoreBuilder/processors/NotificationTransformer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoreBuilder/target/classes/org/ulpgc/StoreBuilder/services/ActiveMQConnector.class" beforeDir="false" afterPath="$PROJECT_DIR$/StoreBuilder/target/classes/org/ulpgc/StoreBuilder/services/ActiveMQConnector.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoreBuilder/target/classes/org/ulpgc/StoreBuilder/services/CommandLineInterface.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoreBuilder/target/classes/org/ulpgc/StoreBuilder/services/Config.class" beforeDir="false" afterPath="$PROJECT_DIR$/StoreBuilder/target/classes/org/ulpgc/StoreBuilder/services/Config.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoreBuilder/target/classes/org/ulpgc/StoreBuilder/services/FileMessageSaver.class" beforeDir="false" afterPath="$PROJECT_DIR$/StoreBuilder/target/classes/org/ulpgc/StoreBuilder/services/FileMessageSaver.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoreBuilder/target/classes/org/ulpgc/StoreBuilder/services/MessageProcessor.class" beforeDir="false" afterPath="$PROJECT_DIR$/StoreBuilder/target/classes/org/ulpgc/StoreBuilder/services/MessageProcessor.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoreBuilder/target/classes/org/ulpgc/StoreBuilder/services/NotificationTransformer.class" beforeDir="false" afterPath="$PROJECT_DIR$/StoreBuilder/target/classes/org/ulpgc/StoreBuilder/services/NotificationTransformer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoreBuilder/target/classes/org/ulpgc/StoreBuilder/services/StatisticalDataTransformer.class" beforeDir="false" afterPath="$PROJECT_DIR$/StoreBuilder/target/classes/org/ulpgc/StoreBuilder/services/StatisticalDataTransformer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

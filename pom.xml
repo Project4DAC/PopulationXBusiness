@@ -9,10 +9,10 @@
     <packaging>pom</packaging>
     <artifactId>BusXop</artifactId>
     <modules>
-        <module>modules/BormeFeeder</module>
-        <module>modules/BusinessUnit</module>
-        <module>modules/StoreBuilder</module>
-        <module>modules/IneFeeder</module>
+        <module>BormeFeeder</module>
+        <module>BusinessUnit</module>
+        <module>IneFeeder</module>
+        <module>StoreBuilder</module>
     </modules>
     <properties>
         <maven.compiler.source>23</maven.compiler.source>
