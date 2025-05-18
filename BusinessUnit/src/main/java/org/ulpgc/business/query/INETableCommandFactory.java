@@ -22,8 +22,7 @@ public class INETableCommandFactory {
             indicadorDAO.setConnection(connection);
 
             // Parse JSON data and create Indicador objects
-            JSONObject jsonData = loadIndicadorData();
-            JSONArray indicadoresArray = new JSONArray(jsonData);
+            JSONArray indicadoresArray = loadIndicadorData();
 
             List<Indicador> indicadores = new ArrayList<>();
 
@@ -37,14 +36,12 @@ public class INETableCommandFactory {
             for (Indicador indicador : indicadores) {
                 indicadorDAO.save(indicador);
             }
-            return String.valueOf(jsonData);
+            return indicadoresArray.toString();
         };
     }
-
-    private static JSONObject loadIndicadorData() {
-    return new JSONObject();
+    private static JSONArray loadIndicadorData() {
+        return new JSONArray();
     }
-
     private static Indicador createIndicadorFromJson(JSONObject indicadorJson) {
         Indicador indicador = new Indicador();
 

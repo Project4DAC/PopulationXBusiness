@@ -225,8 +225,6 @@ public class Main {
 
             APIService apiService = new APIService();
 
-            OperacionRepository operacionRepository = RepositoryFactory.getRepository(OperacionRepository.class);
-            TablaRepository tablaRepository = RepositoryFactory.getRepository(TablaRepository.class);
 
             try (Scanner scanner = new Scanner(System.in)) {
                 boolean running = true;
@@ -330,7 +328,8 @@ public class Main {
         System.out.println("4. View indicator metadata");
         System.out.println("5. Export indicator data to CSV");
         System.out.println("0. Return to main menu");
-        System.out.print("Enter your choice: ");
+        System.out.print("Enter your choice: ")
+        ;
     }
 
     private static int readIntInput(Scanner scanner, int min, int max) {

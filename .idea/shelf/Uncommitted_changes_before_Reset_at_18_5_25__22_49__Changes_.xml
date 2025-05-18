@@ -1,0 +1,34 @@
+<changelist name="Uncommitted_changes_before_Reset_at_18_5_25,_22_49_[Changes]" date="1747604957548" recycled="true" deleted="true">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Reset_at_18_5_25,_22_49_[Changes]/shelved.patch" />
+  <option name="DESCRIPTION" value="Uncommitted changes before Reset at 18/5/25, 22:49 [Changes]" />
+  <binary>
+    <option name="BEFORE_PATH" value="BusinessUnit/target/classes/org/ulpgc/business/operations/DAO/OperacionDAO.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="BusinessUnit/target/classes/org/ulpgc/business/operations/POJO/DatosTabla$Metadata.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="BusinessUnit/target/classes/org/ulpgc/business/query/SaveDataCommand$1.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="BusinessUnit/target/classes/org/ulpgc/business/query/ParseAndSaveJsonCommand$SafeJsonArrayAdapter.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="BusinessUnit/target/classes/org/ulpgc/business/interfaces/TablaRepository.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="BusinessUnit/target/classes/org/ulpgc/business/operations/POJO/DatosTabla.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="BusinessUnit/target/classes/org/ulpgc/business/service/JsonMapperService.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="BusinessUnit/target/classes/org/ulpgc/business/interfaces/GenericRepository.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="BusinessUnit/target/classes/org/ulpgc/business/operations/POJO/ValoresVariable.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="BusinessUnit/target/classes/org/ulpgc/business/operations/DAO/DatabaseConnectionManager.class" />
+  </binary>
+</changelist>

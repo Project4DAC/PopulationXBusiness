@@ -114,6 +114,7 @@
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RESET_MODE" value="HARD" />
   </component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
@@ -235,7 +236,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="origin/Develop" />
+                        <option value="Fix" />
                       </list>
                     </value>
                   </entry>

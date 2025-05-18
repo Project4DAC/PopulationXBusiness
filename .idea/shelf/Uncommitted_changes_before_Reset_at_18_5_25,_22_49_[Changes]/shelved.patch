@@ -1,0 +1,120 @@
+Index: BusinessUnit/src/main/java/org/ulpgc/business/service/EntityValidator.java
+===================================================================
+diff --git a/BusinessUnit/src/main/java/org/ulpgc/business/service/EntityValidator.java b/BusinessUnit/src/main/java/org/ulpgc/business/service/EntityValidator.java
+deleted file mode 100644
+--- a/BusinessUnit/src/main/java/org/ulpgc/business/service/EntityValidator.java	(revision 1f7c9c9de26d78a7ab26145fa90dabcc228f3f21)
++++ /dev/null	(revision 1f7c9c9de26d78a7ab26145fa90dabcc228f3f21)
+@@ -1,47 +0,0 @@
+-package org.ulpgc.business.service;
+-
+-import javax.validation.ConstraintViolation;
+-import javax.validation.Validation;
+-import javax.validation.Validator;
+-import javax.validation.ValidatorFactory;
+-import org.hibernate.validator.messageinterpolation.ParameterMessageInterpolator;
+-import java.util.Set;
+-
+-public class EntityValidator {
+-    private static final ValidatorFactory validatorFactory = Validation.byDefaultProvider()
+-            .configure()
+-            .messageInterpolator(new ParameterMessageInterpolator())
+-            .buildValidatorFactory();
+-
+-    private static final Validator validator = validatorFactory.getValidator();
+-
+-    /**
+-     * Validates the given entity using Bean Validation
+-     * @param entity The entity to validate
+-     * @param <T> Type of the entity
+-     * @throws ValidationException if validation fails
+-     */
+-    public <T> void validate(T entity) {
+-        Set<ConstraintViolation<T>> violations = validator.validate(entity);
+-
+-        if (!violations.isEmpty()) {
+-            StringBuilder errorMessage = new StringBuilder("Validation failed:");
+-            for (ConstraintViolation<T> violation : violations) {
+-                errorMessage.append("\n - ")
+-                        .append(violation.getPropertyPath())
+-                        .append(": ")
+-                        .append(violation.getMessage());
+-            }
+-            throw new ValidationException(errorMessage.toString());
+-        }
+-    }
+-
+-    /**
+-     * Custom exception for validation errors
+-     */
+-    public static class ValidationException extends RuntimeException {
+-        public ValidationException(String message) {
+-            super(message);
+-        }
+-    }
+-}
+\ No newline at end of file
+Index: .idea/modules.xml
+===================================================================
+diff --git a/.idea/modules.xml b/.idea/modules.xml
+deleted file mode 100644
+--- a/.idea/modules.xml	(revision 1f7c9c9de26d78a7ab26145fa90dabcc228f3f21)
++++ /dev/null	(revision 1f7c9c9de26d78a7ab26145fa90dabcc228f3f21)
+@@ -1,8 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-<project version="4">
+-  <component name="ProjectModuleManager">
+-    <modules>
+-      <module fileurl="file://$PROJECT_DIR$/BusXpop.iml" filepath="$PROJECT_DIR$/BusXpop.iml" />
+-    </modules>
+-  </component>
+-</project>
+\ No newline at end of file
+Index: BusinessUnit/src/main/java/org/ulpgc/business/repository/OperacionRepositoryImpl.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package org.ulpgc.business.repository;\n\nimport org.ulpgc.business.Exceptions.DatabaseException;\nimport org.ulpgc.business.interfaces.OperacionRepository;\nimport org.ulpgc.business.operations.DAO.DatabaseConnectionManager;\nimport org.ulpgc.business.operations.POJO.Operacion;\nimport org.ulpgc.business.service.EntityValidator;\n\nimport java.sql.Connection;\nimport java.sql.PreparedStatement;\nimport java.sql.ResultSet;\nimport java.sql.SQLException;\nimport java.util.ArrayList;\nimport java.util.List;\nimport java.util.Optional;\n\npublic class OperacionRepositoryImpl implements OperacionRepository {\n    private final EntityValidator validator;\n\n    public OperacionRepositoryImpl() {\n        this.validator = new EntityValidator();\n    }\n\n    @Override\n    public void save(Operacion entity) {\n        validator.validate(entity);\n        \n        String sql = \"INSERT OR REPLACE INTO operaciones \" +\n                \"(id, COD_IOE, nombre, codigo, url_operacion) \" +\n                \"VALUES (?, ?, ?, ?, ?)\";\n        \n        try (Connection conn = DatabaseConnectionManager.getConnection();\n             PreparedStatement stmt = conn.prepareStatement(sql)) {\n            \n            stmt.setInt(1, entity.getId());\n            stmt.setString(2, entity.getCodIoE());\n            stmt.setString(3, entity.getNombre());\n            stmt.setString(4, entity.getCodigo());\n            stmt.setString(5, entity.getUrlOperacion());\n            \n            stmt.executeUpdate();\n            DatabaseConnectionManager.commitTransaction();\n        } catch (SQLException e) {\n            DatabaseConnectionManager.rollbackTransaction();\n            throw new DatabaseException(\"Error saving operacion\", e);\n        }\n    }\n\n    @Override\n    public Optional<Operacion> findById(Integer id) {\n        String sql = \"SELECT * FROM operaciones WHERE id = ?\";\n        \n        try (Connection conn = DatabaseConnectionManager.getConnection();\n             PreparedStatement stmt = conn.prepareStatement(sql)) {\n            \n            stmt.setInt(1, id);\n            \n            try (ResultSet rs = stmt.executeQuery()) {\n                if (rs.next()) {\n                    Operacion operacion = new Operacion();\n                    operacion.setId(rs.getInt(\"id\"));\n                    operacion.setCodIoE(rs.getString(\"COD_IOE\"));\n                    operacion.setNombre(rs.getString(\"nombre\"));\n                    operacion.setCodigo(rs.getString(\"codigo\"));\n                    operacion.setUrlOperacion(rs.getString(\"url_operacion\"));\n                    \n                    return Optional.of(operacion);\n                }\n            }\n            \n            return Optional.empty();\n        } catch (SQLException e) {\n            throw new DatabaseException(\"Error finding operacion by ID\", e);\n        }\n    }\n\n    @Override\n    public List<Operacion> findAll() {\n        List<Operacion> operaciones = new ArrayList<>();\n        String sql = \"SELECT * FROM operaciones\";\n        \n        try (Connection conn = DatabaseConnectionManager.getConnection();\n             PreparedStatement stmt = conn.prepareStatement(sql);\n             ResultSet rs = stmt.executeQuery()) {\n            \n            while (rs.next()) {\n                Operacion operacion = new Operacion();\n                operacion.setId(rs.getInt(\"id\"));\n                operacion.setCodIoE(rs.getString(\"COD_IOE\"));\n                operacion.setNombre(rs.getString(\"nombre\"));\n                operacion.setCodigo(rs.getString(\"codigo\"));\n                operacion.setUrlOperacion(rs.getString(\"url_operacion\"));\n                \n                operaciones.add(operacion);\n            }\n            \n            return operaciones;\n        } catch (SQLException e) {\n            throw new DatabaseException(\"Error finding all operaciones\", e);\n        }\n    }\n\n    @Override\n    public void delete(Integer id) {\n        String sql = \"DELETE FROM operaciones WHERE id = ?\";\n        \n        try (Connection conn = DatabaseConnectionManager.getConnection();\n             PreparedStatement stmt = conn.prepareStatement(sql)) {\n            \n            stmt.setInt(1, id);\n            stmt.executeUpdate();\n            DatabaseConnectionManager.commitTransaction();\n        } catch (SQLException e) {\n            DatabaseConnectionManager.rollbackTransaction();\n            throw new DatabaseException(\"Error deleting operacion\", e);\n        }\n    }\n\n    @Override\n    public void update(Operacion entity) {\n        validator.validate(entity);\n        \n        // Reuse save method for update, as it uses INSERT OR REPLACE\n        save(entity);\n    }\n\n    @Override\n    public Optional<Operacion> findByCodigo(String codigo) {\n        String sql = \"SELECT * FROM operaciones WHERE codigo = ?\";\n        \n        try (Connection conn = DatabaseConnectionManager.getConnection();\n             PreparedStatement stmt = conn.prepareStatement(sql)) {\n            \n            stmt.setString(1, codigo);\n            \n            try (ResultSet rs = stmt.executeQuery()) {\n                if (rs.next()) {\n                    Operacion operacion = new Operacion();\n                    operacion.setId(rs.getInt(\"id\"));\n                    operacion.setCodIoE(rs.getString(\"COD_IOE\"));\n                    operacion.setNombre(rs.getString(\"nombre\"));\n                    operacion.setCodigo(rs.getString(\"codigo\"));\n                    operacion.setUrlOperacion(rs.getString(\"url_operacion\"));\n                    \n                    return Optional.of(operacion);\n                }\n            }\n            \n            return Optional.empty();\n        } catch (SQLException e) {\n            throw new DatabaseException(\"Error finding operacion by codigo\", e);\n        }\n    }\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/BusinessUnit/src/main/java/org/ulpgc/business/repository/OperacionRepositoryImpl.java b/BusinessUnit/src/main/java/org/ulpgc/business/repository/OperacionRepositoryImpl.java
+--- a/BusinessUnit/src/main/java/org/ulpgc/business/repository/OperacionRepositoryImpl.java	(revision 1f7c9c9de26d78a7ab26145fa90dabcc228f3f21)
++++ b/BusinessUnit/src/main/java/org/ulpgc/business/repository/OperacionRepositoryImpl.java	(date 1747604938930)
+@@ -4,7 +4,6 @@
+ import org.ulpgc.business.interfaces.OperacionRepository;
+ import org.ulpgc.business.operations.DAO.DatabaseConnectionManager;
+ import org.ulpgc.business.operations.POJO.Operacion;
+-import org.ulpgc.business.service.EntityValidator;
+ 
+ import java.sql.Connection;
+ import java.sql.PreparedStatement;
+Index: BusinessUnit/pom.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project xmlns=\"http://maven.apache.org/POM/4.0.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd\">\n    <parent>\n        <artifactId>BusXpop</artifactId>\n        <groupId>org.ulpgc</groupId>\n        <version>1.0-SNAPSHOT</version>\n        <relativePath>../pom.xml/pom.xml</relativePath>\n    </parent>\n    <modelVersion>4.0.0</modelVersion>\n    <artifactId>BusinessUnit</artifactId>\n    <properties>\n        <maven.compiler.target>21</maven.compiler.target>\n        <maven.compiler.source>21</maven.compiler.source>\n        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>\n    </properties>\n</project>\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/BusinessUnit/pom.xml b/BusinessUnit/pom.xml
+--- a/BusinessUnit/pom.xml	(revision 1f7c9c9de26d78a7ab26145fa90dabcc228f3f21)
++++ b/BusinessUnit/pom.xml	(date 1747604938572)
+@@ -6,6 +6,20 @@
+         <version>1.0-SNAPSHOT</version>
+         <relativePath>../pom.xml/pom.xml</relativePath>
+     </parent>
++    <dependencies>
++        <dependency>
++            <groupId>com.google.code.gson</groupId>
++            <artifactId>gson</artifactId>
++            <version>2.10.1</version>
++            <scope>compile</scope>
++        </dependency>
++        <dependency>
++            <groupId>com.zaxxer</groupId>
++            <artifactId>HikariCP</artifactId>
++            <version>6.2.1</version>
++            <scope>compile</scope>
++        </dependency>
++    </dependencies>
+     <modelVersion>4.0.0</modelVersion>
+     <artifactId>BusinessUnit</artifactId>
+     <properties>
