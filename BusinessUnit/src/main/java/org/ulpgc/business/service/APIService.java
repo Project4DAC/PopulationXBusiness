@@ -26,22 +26,22 @@ import java.io.FileWriter;
 public class APIService {
     private static final String BASE_URL = "https://servicios.ine.es/wstempus/js/";
     private static final String API_VERSION = "ES";
-    
+
     private final DAOFactory daoFactory;
     private final Gson gson;
-    
+
     public APIService() {
         this.daoFactory = DAOFactory.getInstance();
         this.gson = daoFactory.getGson();
     }
-    
+
     /**
      * Fetch data for a specific operation and save it to the database
      * @return The fetched and saved operation
      */
     public List<Indicador> getAllIndicators() {
         try (Connection conn = DatabaseConnectionManager.getConnection()) {
-            return daoFactory.getIndicadorDAO().findAll(conn);
+            return daoFactory.getIndicadorDAO().findAll();
         } catch (SQLException e) {
             throw new DatabaseException("Error fetching all indicators", e);
         }
@@ -65,7 +65,7 @@ public class APIService {
 
     public Optional<Indicador> getIndicatorMetadata(String code) {
         try (Connection conn = DatabaseConnectionManager.getConnection()) {
-            return Optional.ofNullable(daoFactory.getIndicadorDAO().findByCod(conn, code));
+            return Optional.ofNullable(daoFactory.getIndicadorDAO().findByCod(code));
         } catch (SQLException e) {
             throw new DatabaseException("Error fetching metadata for indicator: " + code, e);
         }
@@ -79,7 +79,7 @@ public class APIService {
         try (FileWriter writer = new FileWriter(fileName)) {
             writer.write("Año,Valor,Unidad\n");
             for (Dato d : data) {
-                writer.write(d.getFecha() + "," + d.getValor() + "," + d.getUnidad() + "\n");
+                writer.write(d.getFecha() + "," + d.getUnidad() + "," + d.getUnidad() + "\n");
             }
             return true;
         } catch (IOException e) {
@@ -93,14 +93,6 @@ public class APIService {
             return daoFactory.getTablaDAO().fetchAndSaveByOperacionCodigo(conn, codigoOperacion);
         } catch (SQLException e) {
             throw new DatabaseException("Error fetching tables for operation: " + codigoOperacion, e);
-        }
-    }
-
-    public boolean fetchAndSaveDatosTabla(int tablaId) {
-        try (Connection conn = DatabaseConnectionManager.getConnection()) {
-            return daoFactory.getDatoDAO().fetchAndSaveByTablaId(conn, tablaId);
-        } catch (SQLException e) {
-            throw new DatabaseException("Error fetching data for table ID: " + tablaId, e);
         }
     }
 

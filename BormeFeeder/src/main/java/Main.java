@@ -33,7 +33,7 @@ public class Main {
         );
         app.post("/runDailyFetcher", ctx -> {
             new Thread(new DailyBormeFetcher()).start();
-            ctx.html("<html><body><h2>Consulta diaria del Borme iniciada.</h2><a href='/'>Volver al inicio</a></body></html>");
+            ctx.html("<html><body><h2>Daily consultation of the Borme started.</h2><a href='/'>Return</a></body></html>");
         });
 
         app.post("/fetchBormeData", Main::handleBorme);
@@ -47,7 +47,6 @@ public class Main {
             ctx.html(output.getValue("html"));
         });
     }
-    //TODO Localizar el español y cambiarlo a ingles.
     private static void handleBorme(Context ctx) {
         try {
             Input input = createBormeInput(ctx);

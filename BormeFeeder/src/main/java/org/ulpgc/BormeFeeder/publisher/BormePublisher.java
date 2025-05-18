@@ -15,7 +15,7 @@ public class BormePublisher {
     private final String brokerUrl;
     private final String user;
     private final String password;
-    private final String topicName = "BORME.Publicaciones.Nuevas";
+    private final String topicName = "BORME.New.Publications";
     private static final boolean DEBUG_MODE = true;
 
     public BormePublisher() {
@@ -158,7 +158,7 @@ public class BormePublisher {
 
             String formattedDate = date.format(DateTimeFormatter.ISO_LOCAL_DATE);
             String messageContent = String.format(
-                    "{ \"message\": \"Nueva publicación en el BORME!\", " +
+                    "{ \"message\": \"New publication in the BORME!\", " +
                             "\"date\": \"%s\", " +
                             "\"url\": \"%s\" }",
                     formattedDate, url);

@@ -19,10 +19,7 @@ public class RepositoryFactory {
         try {
             // Lógica de creación de repositorios
             if (key == OperacionRepository.class) {
-                return new OperacionRepositoryImpl();
             } else if (key == TablaRepository.class) {
-
-                return new TablaRepositoryImpl();
             }
             // Otros repositorios...
             throw new IllegalArgumentException("No repository found for " + key.getSimpleName());

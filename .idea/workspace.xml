@@ -5,7 +5,95 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ca3111e5-42fd-47f6-9b96-9517c6d36c0f" name="Changes" comment="Forgot to work on production. Fixing that">
+      <change afterPath="$PROJECT_DIR$/BusinessUnit/src/main/java/org/ulpgc/business/analysis/SocioeconomicImpactAnalyzer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BusinessUnit/src/main/java/org/ulpgc/business/interfaces/Command.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BusinessUnit/src/main/java/org/ulpgc/business/interfaces/DataProcessor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BusinessUnit/src/main/java/org/ulpgc/business/interfaces/MessageBrokerConnector.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BusinessUnit/src/main/java/org/ulpgc/business/interfaces/MessageSaver.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BusinessUnit/src/main/java/org/ulpgc/business/operations/DAO/DatoDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BusinessUnit/src/main/java/org/ulpgc/business/operations/DAO/IndicadorDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BusinessUnit/src/main/java/org/ulpgc/business/operations/POJO/Dato.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BusinessUnit/src/main/java/org/ulpgc/business/operations/POJO/Indicador.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BusinessUnit/src/main/java/org/ulpgc/business/query/ActiveMQConnector.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BusinessUnit/src/main/java/org/ulpgc/business/query/BormeTableCommandFactory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BusinessUnit/src/main/java/org/ulpgc/business/query/Config.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BusinessUnit/src/main/java/org/ulpgc/business/query/INETableCommandFactory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BusinessUnit/src/main/java/org/ulpgc/business/repository/DatabaseOutput.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BusinessUnit/src/main/java/org/ulpgc/business/service/INEDataMartProcessor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BusinessUnit/src/main/java/org/ulpgc/business/service/MessageProcessor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/IneFeeder/src/main/java/org/ulpgc/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/IneFeeder/src/main/java/org/ulpgc/inefeeder/commands/update/DailyINEFetcher.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/StoreBuilder/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BormeFeeder/dependency-reduced-pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BormeFeeder/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/BormeFeeder/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BormeFeeder/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/BormeFeeder/src/main/java/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BormeFeeder/src/main/java/org/ulpgc/BormeFeeder/commands/query/BuildURLCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/BormeFeeder/src/main/java/org/ulpgc/BormeFeeder/commands/query/BuildURLCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BormeFeeder/src/main/java/org/ulpgc/BormeFeeder/commands/query/FetchDataCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/BormeFeeder/src/main/java/org/ulpgc/BormeFeeder/commands/query/FetchDataCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BormeFeeder/src/main/java/org/ulpgc/BormeFeeder/commands/update/BormeFetchDataCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/BormeFeeder/src/main/java/org/ulpgc/BormeFeeder/commands/update/BormeFetchDataCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BormeFeeder/src/main/java/org/ulpgc/BormeFeeder/publisher/BormePublisher.java" beforeDir="false" afterPath="$PROJECT_DIR$/BormeFeeder/src/main/java/org/ulpgc/BormeFeeder/publisher/BormePublisher.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BormeFeeder/src/main/java/org/ulpgc/BormeFeeder/services/general/commands/RenderHomeCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/BormeFeeder/src/main/java/org/ulpgc/BormeFeeder/services/general/commands/RenderHomeCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BormeFeeder/src/main/java/org/ulpgc/BormeFeeder/services/general/commands/RenderResultCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/BormeFeeder/src/main/java/org/ulpgc/BormeFeeder/services/general/commands/RenderResultCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BusXpop.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BusinessUnit/dependency-reduced-pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BusinessUnit/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/BusinessUnit/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BusinessUnit/src/main/java/org/ulpgc/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/BusinessUnit/src/main/java/org/ulpgc/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BusinessUnit/src/main/java/org/ulpgc/business/repository/OperacionRepositoryImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BusinessUnit/src/main/java/org/ulpgc/business/repository/RepositoryFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/BusinessUnit/src/main/java/org/ulpgc/business/repository/RepositoryFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BusinessUnit/src/main/java/org/ulpgc/business/service/APIService.java" beforeDir="false" afterPath="$PROJECT_DIR$/BusinessUnit/src/main/java/org/ulpgc/business/service/APIService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BusinessUnit/src/main/java/org/ulpgc/business/service/EntityValidator.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BusinessUnit/src/main/java/org/ulpgc/business/service/JsonMapperService.java" beforeDir="false" afterPath="$PROJECT_DIR$/BusinessUnit/src/main/java/org/ulpgc/business/service/JsonMapperService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BusinessUnit/target/classes/org/ulpgc/business/interfaces/GenericRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BusinessUnit/target/classes/org/ulpgc/business/interfaces/TablaRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BusinessUnit/target/classes/org/ulpgc/business/operations/DAO/DatabaseConnectionManager.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BusinessUnit/target/classes/org/ulpgc/business/operations/DAO/OperacionDAO.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BusinessUnit/target/classes/org/ulpgc/business/operations/POJO/DatosTabla$Metadata.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BusinessUnit/target/classes/org/ulpgc/business/operations/POJO/DatosTabla.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BusinessUnit/target/classes/org/ulpgc/business/operations/POJO/ValoresVariable.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BusinessUnit/target/classes/org/ulpgc/business/query/ParseAndSaveJsonCommand$SafeJsonArrayAdapter.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BusinessUnit/target/classes/org/ulpgc/business/query/SaveDataCommand$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BusinessUnit/target/classes/org/ulpgc/business/service/JsonMapperService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BusinessUnit/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BusinessUnit/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BusinessUnit/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IneFeeder/dependency-reduced-pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IneFeeder/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/IneFeeder/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IneFeeder/src/main/java/org/ulpgc/inefeeder/commands/publisher/UpdateMQSettingsCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/IneFeeder/src/main/java/org/ulpgc/inefeeder/commands/publisher/UpdateMQSettingsCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IneFeeder/src/main/java/org/ulpgc/inefeeder/commands/query/FetchDataCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/IneFeeder/src/main/java/org/ulpgc/inefeeder/commands/query/FetchDataCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IneFeeder/src/main/java/org/ulpgc/inefeeder/servicios/general/commands/RenderHomeCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/IneFeeder/src/main/java/org/ulpgc/inefeeder/servicios/general/commands/RenderHomeCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IneFeeder/src/main/java/org/ulpgc/inefeeder/servicios/general/commands/RenderResultCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/IneFeeder/src/main/java/org/ulpgc/inefeeder/servicios/general/commands/RenderResultCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoreBuilder/target/classes/org/ulpgc/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoreBuilder/target/classes/org/ulpgc/StoreBuilder/Interfaces/Command.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoreBuilder/target/classes/org/ulpgc/StoreBuilder/Interfaces/DataProcessor.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoreBuilder/target/classes/org/ulpgc/StoreBuilder/Interfaces/DataTransformer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoreBuilder/target/classes/org/ulpgc/StoreBuilder/Interfaces/MessageBrokerConnector.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoreBuilder/target/classes/org/ulpgc/StoreBuilder/Interfaces/MessageSaver.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoreBuilder/target/classes/org/ulpgc/StoreBuilder/processors/BormeDataProcessor.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoreBuilder/target/classes/org/ulpgc/StoreBuilder/processors/ConsumptionTransformer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoreBuilder/target/classes/org/ulpgc/StoreBuilder/processors/ContentTransformer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoreBuilder/target/classes/org/ulpgc/StoreBuilder/processors/INEDataProcessor.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoreBuilder/target/classes/org/ulpgc/StoreBuilder/processors/NotificationTransformer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoreBuilder/target/classes/org/ulpgc/StoreBuilder/services/ActiveMQConnector.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoreBuilder/target/classes/org/ulpgc/StoreBuilder/services/Config.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoreBuilder/target/classes/org/ulpgc/StoreBuilder/services/FileMessageSaver.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoreBuilder/target/classes/org/ulpgc/StoreBuilder/services/MessageProcessor.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoreBuilder/target/classes/org/ulpgc/StoreBuilder/services/NotificationTransformer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoreBuilder/target/classes/org/ulpgc/StoreBuilder/services/StatisticalDataTransformer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoreBuilder/target/maven-archiver/pom.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoreBuilder/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoreBuilder/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoreBuilder/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,46 +126,49 @@
     <option name="flattenModules" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.Main.executor": "Run",
-    "Application.MainLauncher.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "Develop",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/home/ancor/Documentos/GitHub/BusXpop",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2997502",
-    "settings.editor.selected.configurable": "reference.settings.project.maven.repository.indices",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;Application.MainLauncher.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Develop&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_directory_selection&quot;: &quot;/home/ancor/Documentos/GitHub/BusXpop/IneFeeder/src/main/java/org/ulpgc&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/ancor/Documentos/GitHub/BusXpop/StoreBuilder&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2997502&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.repository.indices&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="org.ulpgc.BormeFeeder.services.general.helpers" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/StoreBuilder" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/modules/StoreBuilder/src/main/java/org/ulpgc/StoreBuilder/services" />
       <recent name="$PROJECT_DIR$/modules/StoreBuilder/src/main/java/org/ulpgc/StoreBuilder" />
       <recent name="$PROJECT_DIR$/IneFeeder/src/main/java/org/ulpgc/inefeeder/Interfaces" />
-      <recent name="$PROJECT_DIR$/BusinessUnit/src/main/java/org/ulpgc/business/service/query" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/IneFeeder/src/main/java" />
+      <recent name="$PROJECT_DIR$/IneFeeder/src" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/modules/StoreBuilder/target/classes/org/ulpgc/StoreBuilder/Commands" />
       <recent name="$PROJECT_DIR$/modules/StoreBuilder/src/main/java/org/ulpgc/StoreBuilder/Commands" />
-      <recent name="$PROJECT_DIR$/modules/BusinessUnit" />
-      <recent name="$PROJECT_DIR$/modules" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="org.ulpgc.business.interfaces" />
+      <recent name="org.ulpgc.business.service" />
       <recent name="org.ulpgc.business.query" />
       <recent name="org.ulpgc.IneSubscriberDataMart.services" />
       <recent name="org.ulpgc.IneSubscriberDataMart.Interfaces" />
@@ -117,6 +208,7 @@
       <workItem from="1747071520850" duration="2977000" />
       <workItem from="1747213058572" duration="6445000" />
       <workItem from="1747490716815" duration="10386000" />
+      <workItem from="1747586461456" duration="13210000" />
     </task>
     <task id="LOCAL-00001" summary="Forgot to work on production. Fixing that">
       <option name="closed" value="true" />

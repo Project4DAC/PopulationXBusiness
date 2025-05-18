@@ -32,7 +32,7 @@ public class UpdateMQSettingsCommand implements Command {
             // Build response
             StringBuilder html = new StringBuilder();
             html.append("<html><body>");
-            html.append("<h2>Configuración de ActiveMQ actualizada</h2>");
+            html.append("<h2>ActiveMQ configuration updated</h2>");
             html.append("<p>Broker URL: ").append(brokerUrl).append("</p>");
             html.append("<a href='/'>Volver a inicio</a>");
             html.append("</body></html>");

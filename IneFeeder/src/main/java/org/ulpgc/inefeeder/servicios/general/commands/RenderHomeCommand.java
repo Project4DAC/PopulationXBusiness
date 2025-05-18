@@ -43,7 +43,7 @@ public class RenderHomeCommand implements Command {
     @Override
     public String execute() {
         StringBuilder html = new StringBuilder(getHtmlHeader());
-        html.append("<h1>Consulta de datos del INE</h1>\n");
+        html.append("<h1>INE data query</h1>\n");
         html.append("<form id='ineForm' method='post' action='/fetchINEData'>\n");
 
         // Language selector
@@ -54,7 +54,7 @@ public class RenderHomeCommand implements Command {
         html.append("</select></div>\n");
 
         // Function selector
-        html.append("<div style='margin-top:10px;'><label for='function'>Función:</label>\n");
+        html.append("<div style='margin-top:10px;'><label for='function'>Function:</label>\n");
         html.append("<select name='function' id='function' onchange='updateParamFields()'>\n");
         for (FuncionesINE function : FuncionesINE.values()) {
             html.append("<option value='").append(function.name()).append("'>")
@@ -68,10 +68,10 @@ public class RenderHomeCommand implements Command {
         // Option to publish to ActiveMQ
         html.append("<div style='margin-top:10px;'>\n");
         html.append("<input type='checkbox' id='publishToActiveMQ' name='publishToActiveMQ' value='true'>\n");
-        html.append("<label for='publishToActiveMQ'>Publicar resultado a ActiveMQ</label>\n");
+        html.append("<label for='publishToActiveMQ'>Publish result to ActiveMQ</label>\n");
         html.append("</div>\n");
 
-        html.append("<div style='margin-top:15px;'><button type='submit'>Consultar datos</button></div>\n");
+        html.append("<div style='margin-top:15px;'><button type='submit'>Consult data</button></div>\n");
         html.append("</form>\n");
 
         // Daily fetch options
@@ -89,12 +89,12 @@ public class RenderHomeCommand implements Command {
 
         // ActiveMQ settings button
         html.append("<div style='margin-top:15px;'>\n");
-        html.append("<button type='button' id='showSettingsBtn' onclick='toggleSettings()' style='background-color:#6c757d; color:white; padding:5px 10px; border:none; border-radius:5px;'>Configuración ActiveMQ</button>\n");
+        html.append("<button type='button' id='showSettingsBtn' onclick='toggleSettings()' style='background-color:#6c757d; color:white; padding:5px 10px; border:none; border-radius:5px;'>Configuration ActiveMQ</button>\n");
         html.append("<div id='mqSettings' style='display:none; margin-top:10px; padding:15px; border:1px solid #ccc; border-radius:5px;'>\n");
         html.append("<form method='post' action='/updateMQSettings'>\n");
         html.append("<div><label for='brokerUrl'>URL del Broker:</label>\n");
         html.append("<input type='text' id='brokerUrl' name='brokerUrl' value='tcp://localhost:61616' style='width:250px; margin-left:5px;'></div>\n");
-        html.append("<div style='margin-top:10px;'><button type='submit' style='background-color:#6c757d; color:white; padding:5px 10px; border:none; border-radius:5px;'>Guardar Configuración</button></div>\n");
+        html.append("<div style='margin-top:10px;'><button type='submit' style='background-color:#6c757d; color:white; padding:5px 10px; border:none; border-radius:5px;'>Save Configuration</button></div>\n");
         html.append("</form>\n");
         html.append("</div></div>\n");
 

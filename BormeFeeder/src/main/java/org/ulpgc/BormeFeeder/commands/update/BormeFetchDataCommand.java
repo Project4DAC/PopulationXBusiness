@@ -33,7 +33,7 @@ public class BormeFetchDataCommand implements Command {
             HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
 
             if (response.statusCode() != 200) {
-                throw new RuntimeException("Error al realizar la consulta: Código " + response.statusCode());
+                throw new RuntimeException("Error performing query: Code " + response.statusCode());
             }
 
             String jsonResponse = response.body();
@@ -43,7 +43,7 @@ public class BormeFetchDataCommand implements Command {
             System.out.println((String) output.getValue("jsonResponse"));
             return jsonResponse;
         } catch (Exception e) {
-            throw new RuntimeException("Error al ejecutar la consulta: " + e.getMessage(), e);
+            throw new RuntimeException("Error executing query: " + e.getMessage(), e);
         }
     }
 }

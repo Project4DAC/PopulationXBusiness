@@ -10,6 +10,7 @@ import org.ulpgc.business.operations.POJO.Operacion;
 import org.ulpgc.business.operations.POJO.TablasOperacion;
 import org.ulpgc.business.query.ActiveMQConnector;
 import org.ulpgc.business.query.BormeTableCommandFactory;
+import org.ulpgc.business.query.Config;
 import org.ulpgc.business.query.INETableCommandFactory;
 import org.ulpgc.business.repository.*;
 import org.ulpgc.business.service.*;
@@ -151,11 +152,11 @@ public class Main {
 
         try {
             ineDataSource = DatabaseUtil.createDataSource(ineDbPath, "IneDbPool");
-            INETableCommandFactory.createInitializeDatabaseCommand(ineDataSource).execute();
+            INETableCommandFactory.createInitializeDatabaseCommand(ineDataSource.getConnection()).execute();
             LOGGER.info("INE Database initialized successfully");
 
             bormeDataSource = DatabaseUtil.createDataSource(bormeDbPath, "BormeDbPool");
-            BormeTableCommandFactory.createInitializeDatabaseCommand(bormeDataSource).execute();
+            BormeTableCommandFactory.createInitializeDatabaseCommand(bormeDataSource.getConnection()).execute();
             LOGGER.info("BORME Database initialized successfully");
         } catch (Exception e) {
             LOGGER.severe("Failed to initialize databases: " + e.getMessage());
@@ -250,7 +251,6 @@ public class Main {
                 }
             }
 
-            // In interactive mode, we should shutdown after exiting the menu
             shutdown();
 
         } catch (Exception e) {
@@ -274,7 +274,7 @@ public class Main {
         if (data.isEmpty()) {
             System.out.println("No data found for indicator " + code);
         } else {
-            data.forEach(d -> System.out.println(d.getFecha() + ": " + d.getValor() + " " + d.getUnidad()));
+            data.forEach(d -> System.out.println(d.getFecha() + ": " + d.getUnidad() + " " + d.getUnidad()));
         }
     }
 
@@ -292,7 +292,7 @@ public class Main {
         if (data.isEmpty()) {
             System.out.println("No data found in the given range.");
         } else {
-            data.forEach(d -> System.out.println(d.getFecha() + ": " + d.getValor() + " " + d.getUnidad()));
+            data.forEach(d -> System.out.println(d.getFecha() + ": " + d.getUnidad() + " " + d.getUnidad()));
         }
     }
 
@@ -421,12 +421,6 @@ public class Main {
             System.out.print("Enter table ID: ");
             int tablaId = readIntInput(scanner, 1, Integer.MAX_VALUE);
 
-            boolean success = apiService.fetchAndSaveDatosTabla(tablaId);
-            if (success) {
-                System.out.println("Table data fetched and saved successfully.");
-            } else {
-                System.out.println("Error fetching table data or no data available.");
-            }
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
         }

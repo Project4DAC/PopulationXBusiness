@@ -39,10 +39,10 @@ public class RenderResultCommand implements Command {
                 html.append("</pre>");
             }
         } else {
-            html.append("<p>No se ha generado ninguna consulta.</p>");
+            html.append("<p>No query has been generated.</p>");
         }
 
-        html.append("<p><a href='/'>Volver al inicio</a></p>");
+        html.append("<p><a href='/'>Return</a></p>");
         html.append(getHtmlFooter());
 
         output.setValue("html", html.toString());

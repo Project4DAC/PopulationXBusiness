@@ -5,6 +5,10 @@
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/StoreBuilder/pom.xml" />
+        <option value="$PROJECT_DIR$/IneFeeder/pom.xml" />
+        <option value="$PROJECT_DIR$/BormeFeeder/pom.xml" />
+        <option value="$PROJECT_DIR$/BusinessUnit/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">

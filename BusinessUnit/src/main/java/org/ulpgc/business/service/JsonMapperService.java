@@ -8,7 +8,6 @@ import com.google.gson.reflect.TypeToken;
 import org.ulpgc.business.operations.DAO.JsonArrayAdapter;
 
 import java.util.List;
-// TODO Hacer modulo del activemq
 public class JsonMapperService {
     private final Gson gson;
 

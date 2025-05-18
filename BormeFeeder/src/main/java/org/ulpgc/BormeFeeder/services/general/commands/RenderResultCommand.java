@@ -25,22 +25,22 @@ public class RenderResultCommand implements Command {
         System.out.println("jsonResponse: " + jsonResponse);
         System.out.println("url: " + url);
         StringBuilder html = new StringBuilder(getHtmlHeader());
-        html.append("<h1>Resultado de la consulta: ").append(function).append("</h1>");
+        html.append("<h1>Query result: ").append(function).append("</h1>");
 
         if (url != null) {
-            html.append("<h2>URL Generada:</h2><p>").append(url).append("</p>");
+            html.append("<h2>Generated URL:</h2><p>").append(url).append("</p>");
 
             if (jsonResponse != null) {
-                html.append("<h2>Datos obtenidos:</h2>");
+                html.append("<h2>Data obtained:</h2>");
                 html.append("<pre style='background-color: #f4f4f4; padding: 10px; border-radius: 5px; overflow: auto; max-height: 500px;'>");
                 html.append(jsonResponse);
                 html.append("</pre>");
             }
         } else {
-            html.append("<p>No se ha generado ninguna consulta.</p>");
+            html.append("<p>No query has been generated.</p>");
         }
 
-        html.append("<p><a href='/'>Volver al inicio</a></p>");
+        html.append("<p><a href='/'>Return</a></p>");
         html.append(getHtmlFooter());
 
         output.setValue("html", html.toString());

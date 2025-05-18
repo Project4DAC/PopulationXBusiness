@@ -21,14 +21,14 @@ public class RenderHomeCommand implements Command {
     @Override
     public String execute() {
         StringBuilder html = new StringBuilder(getHtmlHeader());
-        html.append("<h1>Consulta de datos del BORME</h1>\n");
+        html.append("<h1>BORME data query</h1>\n");
         html.append("<form id='bormeForm' method='post' action='/fetchBormeData'>\n");
         html.append("<div style='margin-top: 10px;'><label for='date'>Fecha:</label>\n");
         html.append("<input type='date' id='date' name='date'></div>\n");
-        html.append("<div style='margin-top: 15px;'><button type='submit'>Consultar datos</button></div>\n");
+        html.append("<div style='margin-top: 15px;'><button type='submit'>Consult data</button></div>\n");
         html.append("</form>\n");
         html.append("<form method='post' action='/runDailyFetcher' style='margin-top:30px;'>\n");
-        html.append("<button type='submit' style='background-color:#007bff; color:white; padding:10px 20px; border:none; border-radius:5px;'>Ejecutar Fetch Diario del Borme</button>\n");
+        html.append("<button type='submit' style='background-color:#007bff; color:white; padding:10px 20px; border:none; border-radius:5px;'>Run Fetch Borme Diary</button>\n");
         html.append("</form>\n");
         html.append(getHtmlFooter());
 

@@ -29,7 +29,7 @@ public class BuildURLCommand implements Command {
         String date = input.getValue("date");
 
         if (date == null) {
-            throw new IllegalArgumentException("La fecha no puede ser nula");
+            throw new IllegalArgumentException("The date cannot be null");
         }
     }
 
